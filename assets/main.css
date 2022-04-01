@@ -1,0 +1,120 @@
+@font-face {
+    font-family: Nunito;
+    src: url(../../complementos/font/Nunito/Nunito-Bold.ttf);
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(../../complementos/font/roboto/RobotoCondensed-Light.ttf);
+}
+
+:root{
+    --app-height: 100%;
+    --firts-color: #1D40A8;
+    --second-color: #eee;
+    --heigth-header : 3.5rem;
+    --font-header: Nunito, Arial, Helvetica, sans-serif;
+    --font-body: Roboto, Arial, Helvetica, sans-serif;
+}
+
+symbol path,
+symbol g path,
+symbol g g path,
+symbol g rect,
+symbol g polygon{
+    fill: var(--second-color);
+}
+
+body{
+    font-size: 16px;
+    margin: 0;
+    height: 100vh;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    height: 100%;
+}
+
+header{
+    color: var(--second-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--firts-color);
+    height: var(--heigth-header);
+    padding-right: 1rem;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-header);
+}
+
+header div{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 70%;
+}
+
+header div a{
+    color: var(--second-color);
+    text-decoration: none;
+    font-size: 1rem;
+    margin-left: .5rem;
+}
+
+header div svg{
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.hide{
+    display: none;
+}
+
+/*class nav in query*/
+.query{
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.query nav{
+    background-color: var(--firts-color);
+    color: var(--second-color);
+    font-size: 1rem;
+    font-family: var(--font-header);
+}
+
+.query nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.query nav ul li{
+    flex-grow: 1;
+    text-align: center;
+}
+
+.query nav ul li a{
+    display: block;
+    text-decoration: none;
+    padding: .5rem 1rem;
+    color: var(--second-color);
+}
+
+.query nav ul li a:not(.active):hover{
+    background-color: #ddd;
+    color: black;
+}
+
+a.active{
+    background-color: yellowgreen;
+}
+
+/*end class nav in query*/

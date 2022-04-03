@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cercania</title>
+    
+    <!-- 
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAM9cbWcbs4jPW9OFLMmFbiBM0pAX8Gbh8&callback=initMap&v=weekly"
+    async
+    ></script>
+    -->
 
     <link rel="stylesheet" href="../complementos/choice/choices.css">
     <script src="../complementos/choice/choices.min.js"></script>
@@ -13,7 +20,7 @@
 </head>
 <body>
     <svg style="display: none;">
-        <symbol id="map_header" viewBox="0 0 496.002 496.002" x="0px" y="0px">
+        <symbol id="map_location" class="contrast_nav" viewBox="0 0 496.002 496.002" x="0px" y="0px">
             <g>
                 <path d="M495.798,476.437l-65.372-192.828c-0.532-1.576-2.012-1.652-3.672-1.652h-69.308
                     c-40.74,58.156-94.676,91.032-95.524,91.54c-4.208,2.512-9.02,3.344-13.92,3.344s-9.716-0.588-13.884-3.08
@@ -55,32 +62,91 @@
         <symbol id="blogger" viewBox="0 0 24 24" x="0px" y="0px">
             <path d="m8.69 8.793c-.121.145-.194.334-.194.539 0 .085.012.166.036.244l-.002-.006c.05.279.261.498.531.559l.005.001c.365.039.788.062 1.216.062.157 0 .312-.003.467-.009l-.022.001h1.34c.141-.023.267-.061.386-.111l-.011.004c.226-.159.371-.419.371-.712 0-.014 0-.028-.001-.042v.002c.001-.01.001-.023.001-.035 0-.293-.174-.546-.425-.66l-.005-.002c-.101-.067-.226-.107-.36-.107-.004 0-.008 0-.012 0h-1.339q-1.232 0-1.5.026c-.19.022-.357.11-.48.24zm3.323 5.032q-2.144 0-2.599.054c-.229.008-.441.077-.621.19l.005-.003c-.107.092-.19.209-.238.342l-.002.006c-.037.09-.059.195-.059.304 0 .034.002.067.006.1v-.004c.024.143.08.27.162.377l-.002-.002c.086.121.204.214.343.266l.005.002c.646.06 1.398.094 2.157.094.297 0 .592-.005.886-.016l-.043.001 2.572-.054.48-.054c.236-.128.4-.362.429-.637v-.004c.006-.037.01-.079.01-.122 0-.232-.108-.44-.277-.574l-.001-.001c-.174-.115-.387-.185-.616-.187h-.001q-.4-.026-2.599-.026zm11.949 7.021q.054-.483.054-9.163v-6.962q-.054-1.447-.107-1.929c-.036-.222-.112-.42-.219-.597l.004.007-.054-.214c-.506-.999-1.438-1.719-2.55-1.926l-.022-.003q-.32-.054-9.136-.054t-9.082.054c-.681.174-1.269.509-1.743.962l.001-.001c-.472.456-.819 1.037-.987 1.691l-.005.025c-.074.349-.117.75-.117 1.161 0 .119.004.236.011.353l-.001-.016v15.595c.011.542.05 1.062.115 1.573l-.008-.073c.108.437.283.82.517 1.161l-.008-.012c.247.351.55.644.898.873l.013.008c.345.235.748.419 1.179.53l.027.006c.456.057.995.095 1.541.104h.013 15.433c.542-.011 1.062-.05 1.573-.115l-.073.008c.749-.171 1.39-.558 1.873-1.09l.003-.003c.476-.518.789-1.193.856-1.938l.001-.013zm-4.554-9.968q.054.32.026 2.492c.003.124.005.271.005.418 0 .75-.051 1.488-.148 2.211l.009-.084c-.209.822-.62 1.529-1.179 2.09-.685.74-1.612 1.246-2.656 1.391l-.023.003q-.48.054-3.644.026t-3.537-.08c-.824-.173-1.541-.55-2.12-1.076l.004.003c-.625-.529-1.098-1.219-1.357-2.007l-.009-.031c-.114-.368-.182-.791-.187-1.23v-.003q-.026-.75-.026-3.322.054-3.108.107-3.43c.208-.784.569-1.466 1.051-2.042l-.007.008c.488-.57 1.11-1.011 1.818-1.276l.031-.01c.36-.168.778-.282 1.219-.319l.014-.001q.64-.054 2.357-.054 1.822.054 2.09.107c.859.29 1.594.749 2.198 1.341l-.001-.001c.808.772 1.317 1.851 1.34 3.05v.004c-.002.028-.003.06-.003.093 0 .187.03.367.086.535l-.003-.012c.064.136.166.245.291.318l.003.002c.105.075.234.124.373.134h.002l.64.054c.287.007.562.046.826.113l-.025-.006c.225.12.386.332.434.585l.001.005z"/>
         </symbol>
+        <symbol id="form_svg" viewBox="0 0 226.834 226.834" x="0px" y="0px">
+            <path d="M80.197,44.939v-9.746c0-1.761,1.433-3.193,3.193-3.193h60.053c1.761,0,3.193,1.433,3.193,3.193v9.746
+            c0,1.761-1.433,3.193-3.193,3.193H83.391C81.63,48.133,80.197,46.7,80.197,44.939z M131.841,17c-0.768-9.5-8.729-17-18.424-17
+            S95.761,7.5,94.993,17H131.841z M192.309,55.334v151.333c0,11.12-9.047,20.167-20.167,20.167H54.692
+            c-11.12,0-20.167-9.047-20.167-20.167V55.334c0-11.12,9.047-20.167,20.167-20.167h10.506c0,0.009-0.001,0.018-0.001,0.026v9.746
+            c0,10.032,8.162,18.193,18.193,18.193h60.053c10.032,0,18.193-8.161,18.193-18.193v-9.746c0-0.009-0.001-0.018-0.001-0.026h10.506
+            C183.262,35.167,192.309,44.214,192.309,55.334z M88.183,143.449c-3.526-2.173-8.147-1.077-10.32,2.449l-7.092,11.504l-3.661-2.884
+            c-3.252-2.563-7.97-2.002-10.532,1.252c-2.563,3.255-2.002,7.97,1.252,10.533l10.271,8.089c1.332,1.049,2.969,1.607,4.64,1.607
+            c0.436,0,0.875-0.038,1.311-0.115c2.105-0.374,3.952-1.629,5.074-3.449l11.506-18.666C92.806,150.243,91.709,145.623,88.183,143.449
+            z M88.183,89.449c-3.526-2.174-8.147-1.076-10.32,2.449l-7.092,11.504l-3.661-2.884c-3.252-2.562-7.97-2.002-10.532,1.252
+            c-2.563,3.255-2.002,7.97,1.252,10.533l10.271,8.089c1.332,1.049,2.969,1.607,4.64,1.607c0.436,0,0.875-0.038,1.311-0.115
+            c2.105-0.374,3.952-1.629,5.074-3.449L90.632,99.77C92.806,96.243,91.709,91.623,88.183,89.449z M165.858,168.5
+            c0-4.143-3.357-7.5-7.5-7.5h-49c-4.142,0-7.5,3.357-7.5,7.5s3.358,7.5,7.5,7.5h49C162.501,176,165.858,172.643,165.858,168.5z
+            M165.858,114.5c0-4.143-3.357-7.5-7.5-7.5h-49c-4.142,0-7.5,3.357-7.5,7.5s3.358,7.5,7.5,7.5h49
+            C162.501,122,165.858,118.643,165.858,114.5z"/>
+        </symbol>
+        <symbol id="table_svg" class="contrast_nav" viewBox="0 0 445 445" x="0px" y="0px">
+            <path d="M0,37.215v55v15v300.57h445v-300.57v-15v-55H0z M276.667,277.595H168.333v-70.19h108.334V277.595z M306.667,207.405H415
+            v70.19H306.667V207.405z M276.667,307.595v70.19H168.333v-70.19H276.667z M30,207.405h108.333v70.19H30V207.405z M168.333,177.405
+            v-70.19h108.334v70.19H168.333z M138.333,107.215v70.19H30v-70.19H138.333z M30,307.595h108.333v70.19H30V307.595z M306.667,377.785
+            v-70.19H415v70.19H306.667z M415,177.405H306.667v-70.19H415V177.405z"/>
+        </symbol>
+        <symbol id="map_header" x="0px" y="0px" viewBox="0 0 512 512">
+            <g>
+                <g>
+                    <polygon points="127.576,150.84 127.576,266.8 159.4,248.2 159.4,133.872 		"/>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <polygon points="255.208,155.264 255.208,266.12 287.024,246.632 287.024,135.768 		"/>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <polygon points="191.4,135.776 191.4,248.2 223.208,266.8 223.208,155.264 		"/>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <path d="M413.352,347.232l-26.528,26.528l-25.632-25.632c35.44-36.96,57.264-87.096,57.264-142.352
+                        C418.456,92.128,326.328,0,212.688,0S6.912,92.128,6.912,205.776S99.04,411.544,212.688,411.544
+                        c46.848,0,90.024-15.688,124.616-42.056l26.896,26.896l-23.872,23.872L432.056,512l73.032-73.032L413.352,347.232z
+                         M319.024,264.552l-79.616,48.792L175.4,275.912l-79.824,46.672V131.64l80.376-42.864l63.256,38.768l79.816-48.904V264.552z"/>
+                </g>
+            </g>
+        </symbol>
     </svg>
-    <main>
-        <header>
-            <div>
-                <svg><use xlink:href="#map_header"/></svg>
-                <a href="#">
-                    Cercanía a centros de salud Zulia
-                </a>
-            </div>
-            <a>
-                hola
+    <header>
+        <div>
+            <svg><use xlink:href="#map_header"/></svg>
+            <a href="#">
+                Cercanía a centros de salud Zulia
             </a>
-        </header>
+        </div>
+        <a>
+            hola
+        </a>
+    </header>
+    <main>
         <section class="query">
             <nav>
                 <ul>
                     <li>
-                        <a class="active" href="#">Formulario</a>
+                        <a class="active" href="#">
+                            <span>Formulario</span>
+                            <svg><use xlink:href="#form_svg"/></svg>
+                        </a>
                     </li>
                     <li>
-                        <a href="#">Geolocalización</a>
+                        <a href="#">
+                            <span>Geolocalización</span>
+                            <svg><use xlink:href="#map_location"/></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span>Resumen</span>
+                            <svg><use xlink:href="#table_svg"/></svg>
+                        </a>
                     </li>
                 </ul>
                 
             </nav>
-            <form id="form_dpt" class="form_dpt">
+            <form id="form_dpt" class="hide">
                 <section class="group_items">
                     <label>Municipio</label>
                     <select id="municipality" required></select>
@@ -116,72 +182,72 @@
             <aside id="geolocation" class="hide">
                 <button>Iniciar</button>
             </aside>
-        </section>
-        <section class="container_table">
-            <table>
-                <caption>
-                    RESUMEN
-                </caption>
-                <thead>
-                    <tr>
-                        <th>ESTABLECIMIENTOS</th>
-                        <th colspan="2">DISTANCIA (METROS)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>CDI SANTA CRUZ DE MARA</td>
-                        <td>200</td>
-                        <td>
-                            <button>
-                                <svg><use xlink:href="#arrow_right"/></svg>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>CMP GUAREIRA</td>
-                        <td>400</td>
-                        <td>
-                            <button>
-                                <svg><use xlink:href="#arrow_right"/></svg>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>CDI SANTA CRUZ DE MARA</td>
-                        <td>200</td>
-                        <td>
-                            <button>
-                                <svg><use xlink:href="#arrow_right"/></svg>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>CMP GUAREIRA</td>
-                        <td>400</td>
-                        <td>
-                            <button>
-                                <svg><use xlink:href="#arrow_right"/></svg>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <aside id="summary_table" class="container_table">
+                <table>
+                    <caption>
+                        RESUMEN
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th>ESTABLECIMIENTOS</th>
+                            <th colspan="2">DISTANCIA (METROS)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CDI SANTA CRUZ DE MARA</td>
+                            <td>200</td>
+                            <td>
+                                <button>
+                                    <svg><use xlink:href="#arrow_right"/></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CMP GUAREIRA</td>
+                            <td>400</td>
+                            <td>
+                                <button>
+                                    <svg><use xlink:href="#arrow_right"/></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CDI SANTA CRUZ DE MARA</td>
+                            <td>200</td>
+                            <td>
+                                <button>
+                                    <svg><use xlink:href="#arrow_right"/></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CMP GUAREIRA</td>
+                            <td>400</td>
+                            <td>
+                                <button>
+                                    <svg><use xlink:href="#arrow_right"/></svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </aside>
         </section>
         <div id="map"></div>
-        <footer>
-            <div>
-                <span class="text-muted">&copy; 2022 Juan Fernandez</span>
-            </div>
-            <div>
-                <a href="https://twitter.com/juancho_2306" target="_blank">
-                    <svg><use xlink:href="#twitter"/></svg>
-                </a>
-                <a href="http://juanfernandez2306.blogspot.com/" target="_blank">
-                    <svg><use xlink:href="#blogger"/></svg>
-                </a>
-            </div>
-        </footer>
     </main>
+    <footer>
+        <div>
+            <span class="text-muted">&copy; 2022 Juan Fernandez</span>
+        </div>
+        <div>
+            <a href="https://twitter.com/juancho_2306" target="_blank">
+                <svg><use xlink:href="#twitter"/></svg>
+            </a>
+            <a href="http://juanfernandez2306.blogspot.com/" target="_blank">
+                <svg><use xlink:href="#blogger"/></svg>
+            </a>
+        </div>
+    </footer>
 </body>
 </html>

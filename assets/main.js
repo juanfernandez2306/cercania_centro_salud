@@ -89,8 +89,25 @@ function load_select(data_municipality){
 
 };
 
+const initial_coordinates = {lat: 10.90847, lng: -72.08446};
+
+/*
+function initMap(){
+    // The map, centered at Uluru
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 7,
+        center: initial_coordinates,
+    });
+
+    return map;
+}
+*/
+
 function load(){
     const url_municipality = 'assets/php/create_list_municipality.php';
+
+    //let map = initMap();
+
     get_data_json(url_municipality)
     .then(response =>{
         if(response.response){

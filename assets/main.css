@@ -28,18 +28,27 @@ symbol g polygon{
     fill: var(--second-color);
 }
 
+symbol.contrast_nav path,
+symbol.contrast_nav g path,
+symbol.contrast_nav g g path,
+symbol.contrast_nav g rect,
+symbol.contrast_nav g polygon{
+    fill: var(--third-color);
+}
+
 body{
     font-size: 16px;
     margin: 0;
-    height: 100vh;
+    overflow-y: scroll;
+    scrollbar-color: var(--second-color) var(--firts-color);
+    max-height: 2000px;
+    background-color: var(--second-color);
 }
 
 main{
     display: block;
     background-color: var(--second-color);
-    height: 100%;
-    max-height: 2000px;
-    overflow-y: scroll;
+    
 }
 
 header{
@@ -81,8 +90,7 @@ header div svg{
 }
 
 /*class nav in query*/
-.query,
-.container_table{
+.query{
     margin-right: 1rem;
     margin-left: 1rem;
 }
@@ -110,6 +118,15 @@ header div svg{
     text-decoration: none;
     padding: .5rem 1rem;
     color: var(--third-color);
+}
+
+.query nav ul li a span{
+    display: none;
+}
+
+.query nav ul li a svg{
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 .query nav ul li a:not(.active){
@@ -236,10 +253,10 @@ header div svg{
 /*style map*/
 #map{
     height: 400px;
-    background-color: aquamarine;
     margin-top: 2rem;
     margin-left: 1rem;
     margin-right: 1rem;
+    background-color: yellowgreen;
 }
 /*end style map*/
 
@@ -249,11 +266,9 @@ footer{
     margin-bottom: 0;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     background-color: var(--firts-color);
-    margin-right: 1rem;
-    margin-left: 1rem;
     color: var(--second-color);
     padding-left: .5rem;
     padding-right: .5rem;
@@ -279,3 +294,67 @@ footer div a:first-child{
     margin-right: .5rem;
 }
 /*end style footer*/
+
+@media screen and (min-width: 900px){
+    body{
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 100vh;
+    }
+
+    main{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow-y: hidden;
+    }
+
+    section.query{
+        margin-left: 1rem;
+    }
+
+    #map{
+        height: 100%;
+        margin-right: 1rem;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    #form_dpt,
+    #summary_table{
+        overflow-y: scroll;
+        height: 100%;
+        scrollbar-color: var(--firts-color) var(--second-color);
+    }
+
+    .container_table table caption{
+        display: none;
+    }
+
+    footer{
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .query nav ul li a span{
+        display: block;
+    }
+    
+    .query nav ul li a svg{
+        display: none;
+    }
+}
+
+@media (min-width: 1200px) {
+    section.query{
+        margin: 0;
+    }
+
+    #map{
+        margin: 0;
+    }
+}

@@ -10,8 +10,11 @@
 
 :root{
     --app-height: 100%;
-    --firts-color: #1D40A8;
+    --firts-color: #22577E;
     --second-color: #eee;
+    --third-color: rgb(66, 44, 44);
+    --color-validity: green;
+    --color-error: red;
     --heigth-header : 3.5rem;
     --font-header: Nunito, Arial, Helvetica, sans-serif;
     --font-body: Roboto, Arial, Helvetica, sans-serif;
@@ -32,10 +35,11 @@ body{
 }
 
 main{
-    display: flex;
-    flex-direction: column;
-    background-color: aqua;
+    display: block;
+    background-color: var(--second-color);
     height: 100%;
+    max-height: 2000px;
+    overflow-y: scroll;
 }
 
 header{
@@ -77,14 +81,14 @@ header div svg{
 }
 
 /*class nav in query*/
-.query{
+.query,
+.container_table{
     margin-right: 1rem;
     margin-left: 1rem;
 }
 
 .query nav{
-    background-color: var(--firts-color);
-    color: var(--second-color);
+    background-color: var(--second-color);
     font-size: 1rem;
     font-family: var(--font-header);
 }
@@ -105,16 +109,173 @@ header div svg{
     display: block;
     text-decoration: none;
     padding: .5rem 1rem;
-    color: var(--second-color);
+    color: var(--third-color);
+}
+
+.query nav ul li a:not(.active){
+    border-bottom: 1px solid var(--third-color);
 }
 
 .query nav ul li a:not(.active):hover{
-    background-color: #ddd;
-    color: black;
+    background-color: #cdcdcdff;
+    color: var(--third-color);
 }
 
-a.active{
-    background-color: yellowgreen;
+.query nav ul li a.active{
+    background-color: var(--firts-color);
+    color: var(--second-color);
+    border-bottom: 1px solid var(--firts-color);
 }
 
 /*end class nav in query*/
+
+/*class form dpt*/
+.form_dpt{
+    background-color: var(--firts-color);
+}
+
+.form_dpt section{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.form_dpt section:first-child{
+    padding-top: .5rem;
+}
+
+.form_dpt section label{
+    color: var(--second-color);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.form_dpt .group_submit input{
+    padding: .5rem;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    margin-bottom: 1rem;
+}
+
+.form_dpt section:last-child{
+    margin-top: .5rem;
+}
+
+.choices__inner{
+    min-height: auto;
+}
+
+/*end class form dpt*/
+
+/*class container table*/
+.container_table{
+    margin-top: 2rem;
+}
+
+.container_table table caption{
+    background-color: var(--firts-color);
+    color: var(--second-color);
+    padding: .5rem;
+    font-weight: 700;
+    font-family: var(--font-body);
+}
+
+.container_table table{
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid var(--firts-color);
+}
+
+.container_table table thead tr{
+    background-color: var(--firts-color);
+    color: var(--second-color);
+    text-align: center;
+    font-size: 1rem;
+    font-family: var(--font-body);
+}
+
+.container_table table thead tr th:nth-child(1){
+    width: 40%;
+}
+
+.container_table table tbody tr{
+    font-size: 1rem;
+    font-family: var(--font-body);
+    color: var(--third-color);
+}
+
+.container_table table tbody tr:nth-child(even){
+    background-color: #cdcdcdff;
+}
+
+.container_table table tbody tr td{
+    text-align: center;
+}
+
+.container_table table tbody tr td button{
+    background-color: var(--firts-color);
+}
+
+.container_table table tbody tr td button svg{
+    width: 1.2rem;
+    height: 1.2rem;
+    padding: .2rem;
+}
+
+.container_table table th,
+.container_table table td{
+    padding: .5rem;
+}
+/*end class container table*/
+
+/*style map*/
+#map{
+    height: 400px;
+    background-color: aquamarine;
+    margin-top: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+/*end style map*/
+
+/*style footer*/
+footer{
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--firts-color);
+    margin-right: 1rem;
+    margin-left: 1rem;
+    color: var(--second-color);
+    padding-left: .5rem;
+    padding-right: .5rem;
+    height: 3rem;
+}
+
+footer svg{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+footer a{
+    text-decoration: none;
+}
+
+footer div span{
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+footer div a:first-child{
+    margin-right: .5rem;
+}
+/*end style footer*/

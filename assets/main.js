@@ -91,7 +91,7 @@ function load_select(data_municipality){
 
 const initial_coordinates = {lat: 10.90847, lng: -72.08446};
 
-/*
+
 function initMap(){
     // The map, centered at Uluru
     const map = new google.maps.Map(document.getElementById("map"), {
@@ -101,12 +101,72 @@ function initMap(){
 
     return map;
 }
-*/
+
+
+function load_data_response(data_response, map){
+    let tbody = selectElement('#summary_table tbody');
+    let data_tbody = data_response.establishment;
+    data_tbody.forEach(element => {
+        let tr = document.createElement('tr');
+        let td = document.createElement('td');
+        let text = document.createTextNode(element.name);
+        td.appendChild(text);
+        tr.appendChild(td);
+
+        td = document.createElement('td');
+        text = document.createTextNode(element.distance);
+        td.appendChild(text);
+        tr.appendChild(td);
+
+        td = document.createElement('td');
+        let button = document.createElement('button');
+        let location = {lat: element.lat, lng: element.lng};
+        
+        button.addEventListener('click', function(e){
+            let btn = e.target;
+            btn.disabled = true;
+            selectElement('#map').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+            setTimeout(() =>{
+                map.setCenter(location);
+                map.setZoom(18);
+                btn.removeAttribute('disabled')
+            }, 1000);
+        }, false);
+        
+        button.innerHTML = `<svg><use xlink:href="#arrow_right"/></svg>`;
+        td.appendChild(button);
+        tr.appendChild(td);
+
+        tbody.appendChild(tr);
+    });
+
+    
+    let data_community = data_response.community;
+    newCenter = {lat: data_community.lat, lng: data_community.lng};
+    let markers = [];
+    data_tbody.forEach((element) => {
+        markers.push(
+            new google.maps.Marker({
+                position: {lat: element.lat, lng: element.lng},
+                map,
+                title: element.name
+            })
+        )
+    })
+
+    map.setCenter(newCenter);
+    map.setZoom(15);
+    console.log(markers);
+    
+}
 
 function load(){
+
     const url_municipality = 'assets/php/create_list_municipality.php';
 
-    //let map = initMap();
+    let map = initMap();
 
     get_data_json(url_municipality)
     .then(response =>{
@@ -117,6 +177,8 @@ function load(){
     .catch(error =>{
         console.log(error);
     })
+
+    load_data_response(data_test, map);
 }
 
 window.addEventListener('load', load, false);

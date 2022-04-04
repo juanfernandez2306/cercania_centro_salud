@@ -43,12 +43,12 @@ body{
     scrollbar-color: var(--second-color) var(--firts-color);
     max-height: 2000px;
     background-color: var(--second-color);
+    scroll-behavior: smooth;
 }
 
 main{
     display: block;
     background-color: var(--second-color);
-    
 }
 
 header{
@@ -191,14 +191,7 @@ header div svg{
 /*class container table*/
 .container_table{
     margin-top: 2rem;
-}
-
-.container_table table caption{
     background-color: var(--firts-color);
-    color: var(--second-color);
-    padding: .5rem;
-    font-weight: 700;
-    font-family: var(--font-body);
 }
 
 .container_table table{
@@ -256,7 +249,8 @@ header div svg{
     margin-top: 2rem;
     margin-left: 1rem;
     margin-right: 1rem;
-    background-color: yellowgreen;
+    border: 2px solid var(--firts-color);
+    /*background-color: yellowgreen;*/
 }
 /*end style map*/
 
@@ -311,22 +305,21 @@ footer div a:first-child{
         overflow-y: hidden;
     }
 
+    .border_top_section{
+        border-top: 2px solid var(--firts-color);
+    }
+
     section.query{
         margin-left: 1rem;
+        overflow-y: scroll;
+        scrollbar-color: var(--firts-color) var(--second-color);
     }
 
     #map{
-        height: 100%;
+        height: auto;
         margin-right: 1rem;
         margin-top: 0;
         margin-bottom: 0;
-    }
-
-    #form_dpt,
-    #summary_table{
-        overflow-y: scroll;
-        height: 100%;
-        scrollbar-color: var(--firts-color) var(--second-color);
     }
 
     .container_table table caption{
@@ -338,6 +331,7 @@ footer div a:first-child{
         margin-right: 0;
         padding-left: 1rem;
         padding-right: 1rem;
+        justify-content: space-between;
     }
 
     .query nav ul li a span{
@@ -351,7 +345,8 @@ footer div a:first-child{
 
 @media (min-width: 1200px) {
     section.query{
-        margin: 0;
+        margin-left: 0;
+        margin-right: .5rem;
     }
 
     #map{

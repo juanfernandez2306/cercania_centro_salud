@@ -219,31 +219,34 @@ function view_main_data(e){
     let element_use = element_target.firstElementChild.firstElementChild;
     let name_icon_svg = element_use.getAttribute('xlink:href');
 
-    selectElement('.footer_icon ul li.active').classList.remove('active');
-    selectElement('symbol.active').classList.remove('active');
+    if(element_li.classList.contains('active') == false){
 
-    let section_past = selectElement('main .show');
-    if(name_current_main != '#delete'){
-        section_past.classList.remove('show');
-        section_past.classList.add('hide');
+        selectElement('.footer_icon ul li.active').classList.remove('active');
+        selectElement('symbol.active').classList.remove('active');
+
+        let section_past = selectElement('main .show');
+        if(name_current_main != '#delete'){
+            section_past.classList.remove('show');
+            section_past.classList.add('hide');
+        }
+
+        element_li.classList.add('active');
+        selectElement(name_icon_svg).classList.add('active');
+
+        section_current = selectElement(name_current_main);
+        section_current.classList.remove('hide');
+        section_current.classList.add('show');
+
+        selectElement('body').style['animation-name'] = 'fade_in_data';
+
+        element_target.removeEventListener("click", view_main_data, false);
+
+        setTimeout(()=>{
+            element_target.addEventListener("click", view_main_data, false);
+            selectElement('body').style['animation-name'] = '';
+        }, 1000)
+
     }
-
-    element_li.classList.add('active');
-    selectElement(name_icon_svg).classList.add('active');
-
-    section_current = selectElement(name_current_main);
-    section_current.classList.remove('hide');
-    section_current.classList.add('show');
-
-    selectElement('body').style['animation-name'] = 'fade_in_data';
-
-    element_target.removeEventListener("click", view_main_data, false);
-
-    setTimeout(()=>{
-        element_target.addEventListener("click", view_main_data, false);
-        selectElement('body').style['animation-name'] = '';
-    }, 1000)
-
     
 }
 
@@ -268,6 +271,39 @@ function event_btn_cancel_preloader(e){
     }, 1000);
 }
 
+function event_btn_confirm_preloader(e){
+    e.preventDefault();
+    let view_show_current = selectElement('main .show');
+    view_show_current.classList.remove('show');
+    view_show_current.classList.add('hide');
+
+    selectElement('#form_location').classList.remove('hide');
+    selectElement('#form_location').classList.add('show');
+
+    selectElement('.footer_icon ul li.active').classList.remove('active');
+    selectElement('symbol.active').classList.remove('active');
+
+    document.querySelectorAll('.footer_icon ul li').forEach((element) =>{
+        element.classList.add('hide');
+    });
+
+    selectElement('.footer_icon ul li:first-child').classList.remove('hide');
+
+    selectElement('#delete').classList.remove('show');
+    selectElement('#delete').classList.add('hide');
+    selectElement('body').style['animation-name'] = 'fade_in_data';
+
+    let array_link_footer = document.querySelectorAll('.footer_icon ul li a');
+
+    array_link_footer.forEach((element) => {
+        element.removeEventListener('click', view_main_data, false);
+    })
+
+    setTimeout(() => {
+        selectElement('body').style['animation-name'] = '';
+    }, 1000);
+}
+
 function load(){
 
     selectElement('#menu_btn_burger').addEventListener('click', function(e){
@@ -281,6 +317,9 @@ function load(){
 
     selectElement('#preloader_btn_cancel').addEventListener('click', 
     event_btn_cancel_preloader, false);
+
+    selectElement('#preloader_btn_confirm').addEventListener('click',
+    event_btn_confirm_preloader, false);
 
     let array_link_footer = document.querySelectorAll('.footer_icon ul li a');
 

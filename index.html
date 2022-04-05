@@ -6,38 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cercania</title>
     
-    
-    <script
+    <!--<script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAM9cbWcbs4jPW9OFLMmFbiBM0pAX8Gbh8&callback=initMap&v=weekly"
     async
-    ></script>
+    ></script>-->
     
     <script src="assets/data_test.js"></script>
     <link rel="stylesheet" href="../complementos/choice/choices.css">
     <script src="../complementos/choice/choices.min.js"></script>
+    <link rel="stylesheet" href="../complementos/choice/base.min.css">
     <link rel="stylesheet" href="assets/main.css">
     <script src="assets/main.js"></script>
 </head>
 <body>
     <svg style="display: none;">
-        <symbol id="map_location" class="contrast_nav" viewBox="0 0 496.002 496.002" x="0px" y="0px">
+        <symbol id="map_location" viewBox="0 0 496.004 496.004" x="0px" y="0px">
             <g>
-                <path d="M495.798,476.437l-65.372-192.828c-0.532-1.576-2.012-1.652-3.672-1.652h-69.308
-                    c-40.74,58.156-94.676,91.032-95.524,91.54c-4.208,2.512-9.02,3.344-13.92,3.344s-9.716-0.588-13.884-3.08
-                    c-0.872-0.516-54.816-33.652-95.56-91.804H69.25c-1.664,0-3.144,0.076-3.672,1.652L0.206,476.925
-                    c-0.404,1.188-0.204,3.24,0.52,4.252c0.732,1.016,1.9,2.368,3.152,2.368h488.248c1.248,0,2.416-1.6,3.148-2.612
-                    C496.002,479.921,496.198,477.621,495.798,476.437z M343.334,458.681c-2.028,4.104-6.148,6.476-10.432,6.476
-                    c-1.732,0-3.488-0.384-5.148-1.208l-79.752-39.444l-79.752,39.448c-1.66,0.824-3.416,1.208-5.148,1.208
-                    c-4.28,0-8.404-2.372-10.432-6.476c-2.848-5.752-0.488-12.732,5.268-15.58l63.832-31.572l-49.072-24.272
-                    c-5.76-2.848-8.116-9.82-5.272-15.58c2.852-5.76,9.832-8.112,15.584-5.268l64.992,32.144l64.992-32.148
-                    c5.756-2.844,12.732-0.492,15.584,5.268c2.848,5.76,0.488,12.732-5.268,15.58l-49.076,24.272l63.832,31.572
-                    C343.822,445.949,346.182,452.929,343.334,458.681z"/>
+                <g>
+                    <path d="M247.972,3.936c-67.376,0-122.192,54.816-122.192,122.192c0,121.872,119.004,194.192,120.208,194.908
+                        c0.608,0.364,1.3,0.548,1.984,0.548c0.684,0,1.376-0.184,1.984-0.548C251.16,320.32,370.164,248,370.164,126.128
+                        C370.164,58.748,315.352,3.936,247.972,3.936z M247.968,198.372c-39.836,0-72.244-32.408-72.244-72.248
+                        c0-39.832,32.408-72.24,72.244-72.24s72.248,32.408,72.248,72.24C320.216,165.964,287.804,198.372,247.968,198.372z"/>
+                </g>
             </g>
             <g>
-                <path d="M248.002,12.457c-72.216,0-130.964,58.756-130.964,130.972c0,130.752,127.688,208.352,128.98,209.12
-                    c0.608,0.364,1.3,0.544,1.984,0.544c0.684,0,1.376-0.18,1.984-0.544c1.292-0.768,128.98-78.368,128.98-209.12
-                    C378.966,71.213,320.218,12.457,248.002,12.457z M248.002,235.617c-50.844,0-92.208-41.364-92.208-92.208
-                    c0-50.852,41.364-92.216,92.208-92.216s92.208,41.364,92.208,92.216C340.21,194.253,298.846,235.617,248.002,235.617z"/>
+                <g>
+                    <g>
+                        <path d="M329.464,492.068c-0.028,0-0.056-0.008-0.084-0.009v0.009H329.464z"/>
+                        <path d="M494.632,119.396c-0.928-0.74-2.096-1.004-3.248-0.732L392.7,142.16c-9.676,125.308-129.616,198.104-130.804,198.812
+                            c-4.208,2.52-9.016,3.856-13.928,3.856c-4.908,0-9.724-1.336-13.856-3.808c-1.32-0.784-131.58-79.76-131.58-214.896
+                            c0-11.004,1.272-21.712,3.6-32.028L2.92,118.668C1.176,119.08,0,120.64,0,122.436v326.792c0,1.188,0.484,2.304,1.416,3.04
+                            c0.692,0.548,1.512,0.836,2.376,0.836c0.296,0,0.584-0.04,0.88-0.108L166.2,414.568l161.62,76.916
+                            c0.056,0.024,0.108,0.12,0.168,0.148c0.446,0.185,0.913,0.403,1.392,0.427V491.9c0,0,0.656-0.052,0.948-0.124l162.776-38.764
+                            c1.752-0.412,2.9-1.988,2.9-3.776v-326.8C496,121.252,495.568,120.132,494.632,119.396z"/>
+                    </g>
+                </g>
             </g>
         </symbol>
         <symbol id="arrow_right" viewBox="0 0 32 32" x="0px" y="0px">
@@ -62,7 +65,7 @@
         <symbol id="blogger" viewBox="0 0 24 24" x="0px" y="0px">
             <path d="m8.69 8.793c-.121.145-.194.334-.194.539 0 .085.012.166.036.244l-.002-.006c.05.279.261.498.531.559l.005.001c.365.039.788.062 1.216.062.157 0 .312-.003.467-.009l-.022.001h1.34c.141-.023.267-.061.386-.111l-.011.004c.226-.159.371-.419.371-.712 0-.014 0-.028-.001-.042v.002c.001-.01.001-.023.001-.035 0-.293-.174-.546-.425-.66l-.005-.002c-.101-.067-.226-.107-.36-.107-.004 0-.008 0-.012 0h-1.339q-1.232 0-1.5.026c-.19.022-.357.11-.48.24zm3.323 5.032q-2.144 0-2.599.054c-.229.008-.441.077-.621.19l.005-.003c-.107.092-.19.209-.238.342l-.002.006c-.037.09-.059.195-.059.304 0 .034.002.067.006.1v-.004c.024.143.08.27.162.377l-.002-.002c.086.121.204.214.343.266l.005.002c.646.06 1.398.094 2.157.094.297 0 .592-.005.886-.016l-.043.001 2.572-.054.48-.054c.236-.128.4-.362.429-.637v-.004c.006-.037.01-.079.01-.122 0-.232-.108-.44-.277-.574l-.001-.001c-.174-.115-.387-.185-.616-.187h-.001q-.4-.026-2.599-.026zm11.949 7.021q.054-.483.054-9.163v-6.962q-.054-1.447-.107-1.929c-.036-.222-.112-.42-.219-.597l.004.007-.054-.214c-.506-.999-1.438-1.719-2.55-1.926l-.022-.003q-.32-.054-9.136-.054t-9.082.054c-.681.174-1.269.509-1.743.962l.001-.001c-.472.456-.819 1.037-.987 1.691l-.005.025c-.074.349-.117.75-.117 1.161 0 .119.004.236.011.353l-.001-.016v15.595c.011.542.05 1.062.115 1.573l-.008-.073c.108.437.283.82.517 1.161l-.008-.012c.247.351.55.644.898.873l.013.008c.345.235.748.419 1.179.53l.027.006c.456.057.995.095 1.541.104h.013 15.433c.542-.011 1.062-.05 1.573-.115l-.073.008c.749-.171 1.39-.558 1.873-1.09l.003-.003c.476-.518.789-1.193.856-1.938l.001-.013zm-4.554-9.968q.054.32.026 2.492c.003.124.005.271.005.418 0 .75-.051 1.488-.148 2.211l.009-.084c-.209.822-.62 1.529-1.179 2.09-.685.74-1.612 1.246-2.656 1.391l-.023.003q-.48.054-3.644.026t-3.537-.08c-.824-.173-1.541-.55-2.12-1.076l.004.003c-.625-.529-1.098-1.219-1.357-2.007l-.009-.031c-.114-.368-.182-.791-.187-1.23v-.003q-.026-.75-.026-3.322.054-3.108.107-3.43c.208-.784.569-1.466 1.051-2.042l-.007.008c.488-.57 1.11-1.011 1.818-1.276l.031-.01c.36-.168.778-.282 1.219-.319l.014-.001q.64-.054 2.357-.054 1.822.054 2.09.107c.859.29 1.594.749 2.198 1.341l-.001-.001c.808.772 1.317 1.851 1.34 3.05v.004c-.002.028-.003.06-.003.093 0 .187.03.367.086.535l-.003-.012c.064.136.166.245.291.318l.003.002c.105.075.234.124.373.134h.002l.64.054c.287.007.562.046.826.113l-.025-.006c.225.12.386.332.434.585l.001.005z"/>
         </symbol>
-        <symbol id="form_svg" viewBox="0 0 226.834 226.834" x="0px" y="0px">
+        <symbol id="form_svg" class="active" viewBox="0 0 226.834 226.834" x="0px" y="0px">
             <path d="M80.197,44.939v-9.746c0-1.761,1.433-3.193,3.193-3.193h60.053c1.761,0,3.193,1.433,3.193,3.193v9.746
             c0,1.761-1.433,3.193-3.193,3.193H83.391C81.63,48.133,80.197,46.7,80.197,44.939z M131.841,17c-0.768-9.5-8.729-17-18.424-17
             S95.761,7.5,94.993,17H131.841z M192.309,55.334v151.333c0,11.12-9.047,20.167-20.167,20.167H54.692
@@ -109,61 +112,67 @@
                 </g>
             </g>
         </symbol>
+        <symbol id="eraser" viewBox="0 0 32 32" x="0px" y="0px">
+            <g>
+                <path d="M28.7,8.9l-5.7-5.7c-1.1-1.1-3.1-1.1-4.2,0l-7.1,7.1c0,0,0,0,0,0s0,0,0,0l-7.5,7.5c-1.2,1.2-1.2,3.1,0,4.2l3.8,3.8
+                    c0.2,0.2,0.4,0.3,0.7,0.3h6.6c0.3,0,0.5-0.1,0.7-0.3l12.7-12.7c0,0,0,0,0,0C29.9,12,29.9,10.1,28.7,8.9z M14.9,24.1H9.2l-3.5-3.5
+                    c-0.4-0.4-0.4-1,0-1.4l6.8-6.8l7.1,7.1L14.9,24.1z"/>
+                <path d="M27,28H5c-0.6,0-1,0.4-1,1s0.4,1,1,1h22c0.6,0,1-0.4,1-1S27.6,28,27,28z"/>
+            </g>
+        </symbol>
     </svg>
     <header>
-        <div>
+        <aside>
             <svg><use xlink:href="#map_header"/></svg>
-            <a href="#">
+            <span>
                 Cercanía a centros de salud Zulia
+            </span>
+        </aside>
+        <section>
+            <a id="menu_btn_burger" href="#" class="menu_btn_burger">
+                <span class="btn_burger"></span>
             </a>
-        </div>
-        <a>
-            hola
-        </a>
+        </section>
+        <nav class="hide">
+            <ul>
+                <li>
+                    <a class="active" href="#">
+                        <span>Formulario</span>
+                        <svg><use xlink:href="#form_svg"/></svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>Geolocalización</span>
+                        <svg><use xlink:href="#map_location"/></svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>Resumen</span>
+                        <svg><use xlink:href="#table_svg"/></svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </header>
     <main>
-        <section class="query">
-            <nav>
-                <ul>
-                    <li>
-                        <a class="active" href="#">
-                            <span>Formulario</span>
-                            <svg><use xlink:href="#form_svg"/></svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span>Geolocalización</span>
-                            <svg><use xlink:href="#map_location"/></svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span>Resumen</span>
-                            <svg><use xlink:href="#table_svg"/></svg>
-                        </a>
-                    </li>
-                </ul>
-                
-            </nav>
-            <form id="form_dpt" class="hide">
+        <section id="form_location" class="show">
+            <form id="form_dpt" class="form_dpt">
                 <section class="group_items">
                     <label>Municipio</label>
                     <select id="municipality" required></select>
-                    <aside data-id="municipality" class="feedback hide"></aside>
                 </section>
                 <section class="group_items">
                     <label>Parroquia</label>
                     <select id="parish" disabled required></select>
-                    <aside data-id="parish" class="feedback hide"></aside>
                 </section>
                 <section class="group_items">
                     <label>Comunidad</label>
                     <select id="community" disabled name="id_comunidad" required></select>
-                    <aside data-id="community" class="feedback hide"></aside>
                 </section>
-                <section>
-                    <label>Selecciona el rango de distancia</label>
+                <section class="group_items">
+                    <label>Selecciona el rango de distancia (metros)</label>
                     <select name="distance" id="distance">
                         <option value="">---</option>
                         <option class="items_urbano" value="0.2">200 metros</option>
@@ -173,30 +182,65 @@
                         <option class="items_rural" value="1.5">1.5 km</option>
                         <option class="items_rural" value="2">2 km</option>
                     </select>
-                    <input class="hide" type="range">
                 </section>
                 <section class="group_submit">
-                    <input type="submit" value="Consultar">
+                    <input type="submit" value="Consultar" disabled>
                 </section>
             </form>
             <aside id="geolocation" class="hide">
                 <button>Iniciar</button>
             </aside>
-            <aside id="summary_table" class="container_table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ESTABLECIMIENTOS</th>
-                            <th colspan="2">DISTANCIA (METROS)</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </aside>
         </section>
-        <div id="map"></div>
+        <section id="summary_table" class="hide">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ESTABLECIMIENTOS</th>
+                        <th colspan="2">DISTANCIA (METROS)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+        <div id="map" class="hide"></div>
     </main>
-    <footer>
+    <section id="delete" class="show">
+        <section class="preloader_delete">
+            <label>
+                <div class="gg-trash"></div>
+            </label>
+            <h3>¿Desea eliminar la consulta actual?</h3>
+            <section>
+                <button class="confirm">Confirmar</button>
+                <button id="preloader_btn_cancel" class="cancel">Cancelar</button>
+            </section>
+        </section>
+    </section>
+    <section class="footer_icon">
+        <ul>
+            <li class="active">
+                <a href="#" data-main="#form_location">
+                    <svg><use xlink:href="#form_svg"/></svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-main="#summary_table">
+                    <svg><use xlink:href="#table_svg"/></svg>
+                </a> 
+            </li>
+            <li>
+                <a href="#" data-main="#map">
+                    <svg><use xlink:href="#map_location"/></svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-main="#delete">
+                    <svg><use xlink:href="#eraser"/></svg>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!--<footer>
         <div>
             <span class="text-muted">&copy; 2022 Juan Fernandez</span>
         </div>
@@ -208,6 +252,6 @@
                 <svg><use xlink:href="#blogger"/></svg>
             </a>
         </div>
-    </footer>
+    </footer>-->
 </body>
 </html>

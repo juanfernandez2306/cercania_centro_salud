@@ -91,7 +91,7 @@ function load_select(data_municipality){
 
 const initial_coordinates = {lat: 10.90847, lng: -72.08446};
 
-
+/*
 function initMap(){
     // The map, centered at Uluru
     const map = new google.maps.Map(document.getElementById("map"), {
@@ -162,23 +162,138 @@ function load_data_response(data_response, map){
     
 }
 
+*/
+
+function create_data_table(data_response, map){
+    let tbody = selectElement('#summary_table tbody');
+    let data_tbody = data_response.establishment;
+    data_tbody.forEach(element => {
+        let tr = document.createElement('tr');
+        let td = document.createElement('td');
+        let text = document.createTextNode(element.name);
+        td.appendChild(text);
+        tr.appendChild(td);
+
+        td = document.createElement('td');
+        text = document.createTextNode(element.distance);
+        td.appendChild(text);
+        tr.appendChild(td);
+
+        td = document.createElement('td');
+        let button = document.createElement('button');
+        let location = {lat: element.lat, lng: element.lng};
+        /*
+        button.addEventListener('click', function(e){
+            let btn = e.target;
+            btn.disabled = true;
+            selectElement('#map').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+            setTimeout(() =>{
+                map.setCenter(location);
+                map.setZoom(18);
+                btn.removeAttribute('disabled')
+            }, 1000);
+        }, false);
+        */
+        button.innerHTML = `<svg><use xlink:href="#arrow_right"/></svg>`;
+        td.appendChild(button);
+        tr.appendChild(td);
+
+        tbody.appendChild(tr);
+    });
+}
+
+function view_main_data(e){
+    e.preventDefault();
+    info_event = e.target;
+    let element_target = info_event;
+    if(info_event.tagName == 'use'){
+        element_target = info_event.parentElement.parentElement
+    }else if(info_event.tagName == 'svg'){
+        element_target = info_event.parentElement
+    }
+    
+    let name_current_main = element_target.dataset.main;
+    let element_li = element_target.parentElement;
+    let element_use = element_target.firstElementChild.firstElementChild;
+    let name_icon_svg = element_use.getAttribute('xlink:href');
+
+    selectElement('.footer_icon ul li.active').classList.remove('active');
+    selectElement('symbol.active').classList.remove('active');
+
+    let section_past = selectElement('main .show');
+    if(name_current_main != '#delete'){
+        section_past.classList.remove('show');
+        section_past.classList.add('hide');
+    }
+
+    element_li.classList.add('active');
+    selectElement(name_icon_svg).classList.add('active');
+
+    section_current = selectElement(name_current_main);
+    section_current.classList.remove('hide');
+    section_current.classList.add('show');
+
+    selectElement('body').style['animation-name'] = 'fade_in_data';
+
+    element_target.removeEventListener("click", view_main_data, false);
+
+    setTimeout(()=>{
+        element_target.addEventListener("click", view_main_data, false);
+        selectElement('body').style['animation-name'] = '';
+    }, 1000)
+
+    
+}
+
+function event_btn_cancel_preloader(e){
+    e.preventDefault();
+    selectElement('#delete').classList.remove('show');
+    selectElement('#delete').classList.add('hide');
+    selectElement('.footer_icon ul li.active').classList.remove('active');
+    selectElement('#eraser').classList.remove('active');
+    selectElement('body').style['animation-name'] = 'fade_in_data';
+
+    let name_section_active = selectElement('main .show').id;
+    let link_section_active = selectElement(`.footer_icon ul li a[data-main="#${name_section_active}"]`);
+    let li_section_active = link_section_active.parentElement;
+    let name_icon_svg_section_active = link_section_active.firstElementChild.firstElementChild.getAttribute('xlink:href');
+    
+    li_section_active.classList.add('active');
+    selectElement(name_icon_svg_section_active).classList.add('active');
+
+    setTimeout(() => {
+        selectElement('body').style['animation-name'] = '';
+    }, 1000);
+}
+
 function load(){
 
-    const url_municipality = 'assets/php/create_list_municipality.php';
-
-    let map = initMap();
-
-    get_data_json(url_municipality)
-    .then(response =>{
-        if(response.response){
-            load_select(response.data);
+    selectElement('#menu_btn_burger').addEventListener('click', function(e){
+        let btn_menu = e.target;
+        if(btn_menu.classList.contains('open')){
+            btn_menu.classList.remove('open');
+        }else{
+            btn_menu.classList.add('open');
         }
-    })
-    .catch(error =>{
-        console.log(error);
+    }, false);
+
+    selectElement('#preloader_btn_cancel').addEventListener('click', 
+    event_btn_cancel_preloader, false);
+
+    let array_link_footer = document.querySelectorAll('.footer_icon ul li a');
+
+    array_link_footer.forEach((element) => {
+        element.addEventListener('click', view_main_data, false);
     })
 
-    load_data_response(data_test, map);
+    let munipality = new Choices('#municipality');
+    let parish = new Choices('#parish');
+    let community = new Choices('#community');
+    let distance = new Choices('#distance');
+
+    create_data_table(data_test, null);
 }
 
 window.addEventListener('load', load, false);

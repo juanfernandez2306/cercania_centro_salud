@@ -219,34 +219,30 @@ function view_main_data(e){
     let element_use = element_target.firstElementChild.firstElementChild;
     let name_icon_svg = element_use.getAttribute('xlink:href');
 
-    if(element_li.classList.contains('active') == false){
+    selectElement('.footer_icon ul li.active').classList.remove('active');
+    selectElement('symbol.active').classList.remove('active');
 
-        selectElement('.footer_icon ul li.active').classList.remove('active');
-        selectElement('symbol.active').classList.remove('active');
-
-        let section_past = selectElement('main .show');
-        if(name_current_main != '#delete'){
-            section_past.classList.remove('show');
-            section_past.classList.add('hide');
-        }
-
-        element_li.classList.add('active');
-        selectElement(name_icon_svg).classList.add('active');
-
-        section_current = selectElement(name_current_main);
-        section_current.classList.remove('hide');
-        section_current.classList.add('show');
-
-        selectElement('body').style['animation-name'] = 'fade_in_data';
-
-        element_target.removeEventListener("click", view_main_data, false);
-
-        setTimeout(()=>{
-            element_target.addEventListener("click", view_main_data, false);
-            selectElement('body').style['animation-name'] = '';
-        }, 1000)
-
+    let section_past = selectElement('main section.show');
+    if(name_current_main != '#delete'){
+        section_past.classList.remove('show');
+        section_past.classList.add('hide');
     }
+
+    element_li.classList.add('active');
+    selectElement(name_icon_svg).classList.add('active');
+
+    section_current = selectElement(name_current_main);
+    section_current.classList.remove('hide');
+    section_current.classList.add('show');
+
+    selectElement('body').style['animation-name'] = 'fade_in_data';
+
+    element_target.removeEventListener("click", view_main_data, false);
+
+    setTimeout(()=>{
+        element_target.addEventListener("click", view_main_data, false);
+        selectElement('body').style['animation-name'] = '';
+    }, 1000)
     
 }
 
@@ -258,13 +254,15 @@ function event_btn_cancel_preloader(e){
     selectElement('#eraser').classList.remove('active');
     selectElement('body').style['animation-name'] = 'fade_in_data';
 
-    let name_section_active = selectElement('main .show').id;
+    //START EVENT ADD CLASS ACTIVE IN ICON SVG MAIN ACTIVE
+    let name_section_active = selectElement('main section.show').id;
     let link_section_active = selectElement(`.footer_icon ul li a[data-main="#${name_section_active}"]`);
     let li_section_active = link_section_active.parentElement;
     let name_icon_svg_section_active = link_section_active.firstElementChild.firstElementChild.getAttribute('xlink:href');
     
     li_section_active.classList.add('active');
     selectElement(name_icon_svg_section_active).classList.add('active');
+    //END EVENT ADD CLASS ACTIVE IN ICON SVG MAIN ACTIVE
 
     setTimeout(() => {
         selectElement('body').style['animation-name'] = '';
@@ -273,7 +271,7 @@ function event_btn_cancel_preloader(e){
 
 function event_btn_confirm_preloader(e){
     e.preventDefault();
-    let view_show_current = selectElement('main .show');
+    let view_show_current = selectElement('main section.show');
     view_show_current.classList.remove('show');
     view_show_current.classList.add('hide');
 

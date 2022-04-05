@@ -115,34 +115,34 @@ header aside span{
 
 /**/
 
-#form_location.show .form_dpt.show{
+#form_location.show #form_dpt.show{
     margin-top: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
     background-color: var(--fourth-color);
 }
 
-#form_location.show .form_dpt .group_items{
+#form_location.show #form_dpt.show .group_items{
     display: flex;
     flex-direction: column;
     margin-top: 1rem;
 }
 
-#form_location.show .form_dpt .group_items label{
+#form_location.show #form_dpt.show .group_items label{
     font-size: 1.1rem;
     font-weight: 700;
     font-family: var(--font-body);
     color: var(--firts-color);
 }
 
-#form_location.show .form_dpt .group_submit{
+#form_location.show #form_dpt.show .group_submit{
     margin-top: 1rem;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1rem;
 }
 
-#form_location.show .form_dpt .group_submit input{
+#form_location.show #form_dpt.show .group_submit input{
     width: 100%;
     padding: .5rem;
     font-size: 1.2rem;
@@ -154,7 +154,7 @@ header aside span{
     border-radius: .5rem;
 }
 
-#form_location.show .form_dpt .group_submit input:disabled{
+#form_location.show #form_dpt.show .group_submit input:disabled{
     background-color: #D8D2CB;
     color: var(--third-color);
 }

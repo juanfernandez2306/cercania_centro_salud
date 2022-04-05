@@ -158,35 +158,47 @@
     </header>
     <main>
         <section id="form_location" class="show">
-            <form id="form_dpt" class="show">
-                <section class="group_items">
-                    <label>Municipio</label>
-                    <select id="municipality" required></select>
-                </section>
-                <section class="group_items">
-                    <label>Parroquia</label>
-                    <select id="parish" disabled required></select>
-                </section>
-                <section class="group_items">
-                    <label>Comunidad</label>
-                    <select id="community" disabled name="id_comunidad" required></select>
-                </section>
-                <section class="group_items">
-                    <label>Selecciona el rango de distancia (metros)</label>
-                    <select name="distance" id="distance">
-                        <option value="">---</option>
-                        <option class="items_urbano" value="0.2">200 metros</option>
-                        <option class="items_urbano" value="0.5">500 metros</option>
-                        <option class="items_urbano" value="0.8">800 metros</option>
-                        <option value="1">1 km</option>
-                        <option class="items_rural" value="1.5">1.5 km</option>
-                        <option class="items_rural" value="2">2 km</option>
-                    </select>
-                </section>
-                <section class="group_submit">
-                    <input type="submit" value="Consultar" disabled>
-                </section>
-            </form>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#form_dpt" class="active">Formulario</a>
+                    </li>
+                    <li>
+                        <a href="#geolocation">Geolocalización</a>
+                    </li>
+                </ul>
+            </nav>
+            <aside id="form_dpt" class="show">
+                <form>
+                    <section class="group_items">
+                        <label>Municipio</label>
+                        <select id="municipality" required></select>
+                    </section>
+                    <section class="group_items">
+                        <label>Parroquia</label>
+                        <select id="parish" disabled required></select>
+                    </section>
+                    <section class="group_items">
+                        <label>Comunidad</label>
+                        <select id="community" disabled name="id_comunidad" required></select>
+                    </section>
+                    <section class="group_items">
+                        <label>Selecciona el rango de distancia (metros)</label>
+                        <select name="distance" id="distance">
+                            <option value="">---</option>
+                            <option class="items_urbano" value="0.2">200 metros</option>
+                            <option class="items_urbano" value="0.5">500 metros</option>
+                            <option class="items_urbano" value="0.8">800 metros</option>
+                            <option value="1">1 km</option>
+                            <option class="items_rural" value="1.5">1.5 km</option>
+                            <option class="items_rural" value="2">2 km</option>
+                        </select>
+                    </section>
+                    <section class="group_submit">
+                        <input type="submit" value="Consultar" disabled>
+                    </section>
+                </form>
+            </aside>
             <aside id="geolocation" class="hide">
                 <button>Iniciar</button>
             </aside>

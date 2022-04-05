@@ -302,7 +302,26 @@ function event_btn_confirm_preloader(e){
     }, 1000);
 }
 
+function event_btn_form_location(e){
+    e.preventDefault();
+    if (e.target.tagName == 'A'){
+        selectElement('#form_location nav ul li a.active').classList.remove('active');
+        e.target.classList.add('active');
+        let href_section = e.target.href;
+        let array_href = href_section.split('/');
+        let id_name_aside = array_href[array_href.length -1];
+        let aside_current = selectElement('#form_location aside.show');
+        aside_current.classList.remove('show');
+        aside_current.classList.add('hide');
+        selectElement(id_name_aside).classList.remove('hide');
+        selectElement(id_name_aside).classList.add('show');
+
+    }
+}
+
 function load(){
+
+    selectElement('#form_location nav ul').addEventListener('click', event_btn_form_location, false);
 
     selectElement('#menu_btn_burger').addEventListener('click', function(e){
         let btn_menu = e.target;

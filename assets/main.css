@@ -14,6 +14,7 @@
     --second-color: #eee;
     --third-color: rgb(66, 44, 44);
     --fourth-color: #DFDFDE;
+    --fifth-color: #D8D2CB;
     --color-validity: green;
     --color-error: #E60965;
     --heigth-header : 3.5rem;
@@ -102,6 +103,8 @@ header aside span{
 
 .footer_icon ul li a{
     text-decoration: none;
+    display: block;
+    padding: .5rem .5rem;
 }
 
 .footer_icon ul li.active{
@@ -112,6 +115,40 @@ header aside span{
     background-color: yellowgreen;
     height: 100%;
 }
+
+/*STYLE NAV FORM LOCATION*/
+#form_location nav{
+    background-color: var(--fifth-color);
+    margin-top: 1rem;
+}
+
+#form_location nav ul{
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+#form_location nav ul li{
+    flex-grow: 1;
+    text-align: center;
+}
+
+#form_location nav ul li a{
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-family: var(--font-body);
+    padding: .5rem 1rem;
+    display: block;
+    color: var(--third-color);
+    border-bottom: 2px solid var(--firts-color);
+}
+
+#form_location nav ul li a.active{
+    background-color: var(--firts-color);
+    color: var(--second-color);
+}
+/*END STYLE NAV FORM LOCATION*/
 
 /**/
 

@@ -206,61 +206,60 @@ function create_data_table(data_response, map){
 
 function view_main_data(e){
     e.preventDefault();
-    info_event = e.target;
-    let element_target = info_event;
-    if(info_event.tagName == 'use'){
-        element_target = info_event.parentElement.parentElement
-    }else if(info_event.tagName == 'svg'){
-        element_target = info_event.parentElement
-    }
-    
-    let name_current_main = element_target.dataset.main;
-    let element_li = element_target.parentElement;
-    let element_use = element_target.firstElementChild.firstElementChild;
-    let name_icon_svg = element_use.getAttribute('xlink:href');
+    let element_target = e.target;
 
-    selectElement('.footer_icon ul li.active').classList.remove('active');
-    selectElement('symbol.active').classList.remove('active');
-
-    let section_past = selectElement('main section.show');
-    if(name_current_main != '#delete'){
-        section_past.classList.remove('show');
-        section_past.classList.add('hide');
+    if(element_target.tagName == 'use'){
+        element_target = element_target.parentElement.parentElement;
+    }else if(element_target.tagName == 'svg'){
+        element_target = element_target.parentElement;
     }
 
-    element_li.classList.add('active');
-    selectElement(name_icon_svg).classList.add('active');
-
-    section_current = selectElement(name_current_main);
-    section_current.classList.remove('hide');
-    section_current.classList.add('show');
-
-    selectElement('body').style['animation-name'] = 'fade_in_data';
-
-    element_target.removeEventListener("click", view_main_data, false);
-
-    setTimeout(()=>{
-        element_target.addEventListener("click", view_main_data, false);
-        selectElement('body').style['animation-name'] = '';
-    }, 1000)
+    let href_element_target = element_target.href;
+    let array_href = href_element_target.split('/');
+    let name_id_section_target = array_href[array_href.length - 1];
     
+    if(element_target.classList.contains('active') == false){
+        let element_use_target = element_target.firstElementChild.firstElementChild;
+        let name_svg_target = element_use_target.getAttribute('xlink:href');
+
+        selectElement('.footer_icon ul li a.active').classList.remove('active');
+        selectElement('symbol.active').classList.remove('active');
+
+        element_target.classList.add('active');
+        selectElement(name_svg_target).classList.add('active');
+
+        let section_past = selectElement('main section.show');
+        if(name_id_section_target != '#delete'){
+            section_past.classList.remove('show');
+            section_past.classList.add('hide');
+        }
+
+        let section_current = selectElement(name_id_section_target);
+        section_current.classList.remove('hide');
+        section_current.classList.add('show');
+
+        selectElement('body').style['animation-name'] = 'fade_in_data';
+
+        setTimeout(()=>{
+            selectElement('body').style['animation-name'] = '';
+        }, 1000)
+    }
 }
 
 function event_btn_cancel_preloader(e){
     e.preventDefault();
     selectElement('#delete').classList.remove('show');
     selectElement('#delete').classList.add('hide');
-    selectElement('.footer_icon ul li.active').classList.remove('active');
+    selectElement('.footer_icon ul li a.active').classList.remove('active');
     selectElement('#eraser').classList.remove('active');
     selectElement('body').style['animation-name'] = 'fade_in_data';
 
     //START EVENT ADD CLASS ACTIVE IN ICON SVG MAIN ACTIVE
     let name_section_active = selectElement('main section.show').id;
-    let link_section_active = selectElement(`.footer_icon ul li a[data-main="#${name_section_active}"]`);
-    let li_section_active = link_section_active.parentElement;
+    let link_section_active = selectElement(`.footer_icon ul li a[href="#${name_section_active}"]`);
     let name_icon_svg_section_active = link_section_active.firstElementChild.firstElementChild.getAttribute('xlink:href');
     
-    li_section_active.classList.add('active');
+    link_section_active.classList.add('active');
     selectElement(name_icon_svg_section_active).classList.add('active');
     //END EVENT ADD CLASS ACTIVE IN ICON SVG MAIN ACTIVE
 
@@ -278,7 +277,7 @@ function event_btn_confirm_preloader(e){
     selectElement('#form_location').classList.remove('hide');
     selectElement('#form_location').classList.add('show');
 
-    selectElement('.footer_icon ul li.active').classList.remove('active');
+    selectElement('.footer_icon ul li a.active').classList.remove('active');
     selectElement('symbol.active').classList.remove('active');
 
     document.querySelectorAll('.footer_icon ul li').forEach((element) =>{
@@ -291,11 +290,8 @@ function event_btn_confirm_preloader(e){
     selectElement('#delete').classList.add('hide');
     selectElement('body').style['animation-name'] = 'fade_in_data';
 
-    let array_link_footer = document.querySelectorAll('.footer_icon ul li a');
-
-    array_link_footer.forEach((element) => {
-        element.removeEventListener('click', view_main_data, false);
-    })
+    selectElement('.footer_icon ul').removeEventListener('click', view_main_data, false);
+    selectElement('.footer_icon ul').addEventListener('click', event_inactive, false);
 
     setTimeout(() => {
         selectElement('body').style['animation-name'] = '';
@@ -319,7 +315,73 @@ function event_btn_form_location(e){
     }
 }
 
+function event_inactive(e){
+    e.preventDefault();
+}
+
+const text_media_query = '(min-width: 900px)';
+
+function move_footer_icon(){
+    let footer = selectElement('section.footer_icon');
+    let parentElementFooter = footer.parentElement.tagName;
+    
+    if(window.matchMedia(text_media_query).matches){
+        if(parentElementFooter === 'BODY'){
+            selectElement('main').append(footer);
+        }
+    }else{
+        if(parentElementFooter === 'MAIN'){
+            selectElement('body').append(footer);
+        }
+    }
+}
+
+function visualize_map(){
+    if(window.matchMedia(text_media_query).matches){
+        let element_map = selectElement('#map');
+        let link_list_active = selectElement('.footer_icon ul li a.active');
+        if(link_list_active == null){
+            selectElement('#form_location').classList.remove('hide');
+            selectElement('#form_location').classList.add('show');
+        }else{
+            let array_href_element_list = link_list_active.href.split('/');
+            let href_element_list = array_href_element_list[array_href_element_list.length -1];
+            if(href_element_list == '#map'){
+                selectElement('.footer_icon ul li a.active').classList.remove('active');
+                selectElement('#map_location').classList.remove('active');
+                selectElement('#summary_table').classList.remove('hide');
+                selectElement('#summary_table').classList.add('show');
+                selectElement(`.footer_icon ul li a[href="#summary_table"]`).classList.add('active');
+                selectElement('#table_svg').classList.add('active');
+            }else if(href_element_list == '#delete'){
+                let sections_visible = document.querySelectorAll('main section.show');
+                if (sections_visible.length < 1){
+                    selectElement('#summary_table').classList.remove('hide');
+                    selectElement('#summary_table').classList.add('show');
+                }
+            }
+        }
+        
+        element_map.classList.remove('hide');
+        element_map.classList.add('show');
+        
+    }else{
+        let link_map = selectElement(`a[href="#map"]`);
+        if(link_map.classList.contains('active') == false){
+            selectElement('#map').classList.remove('show');
+            selectElement('#map').classList.add('hide');
+        }
+        
+    }
+}
+
 function load(){
+
+    visualize_map();
+    move_footer_icon();
+
+    window.addEventListener('resize', visualize_map, false);
+    window.addEventListener('resize', move_footer_icon, false);
 
     selectElement('#form_location nav ul').addEventListener('click', event_btn_form_location, false);
 
@@ -338,11 +400,7 @@ function load(){
     selectElement('#preloader_btn_confirm').addEventListener('click',
     event_btn_confirm_preloader, false);
 
-    let array_link_footer = document.querySelectorAll('.footer_icon ul li a');
-
-    array_link_footer.forEach((element) => {
-        element.addEventListener('click', view_main_data, false);
-    })
+    selectElement('.footer_icon ul').addEventListener('click', view_main_data, false);
 
     let munipality = new Choices('#municipality');
     let parish = new Choices('#parish');

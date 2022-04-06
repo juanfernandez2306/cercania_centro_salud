@@ -88,6 +88,10 @@ header aside span{
     width: 80%;
 }
 
+main{
+    background-color: var(--fourth-color);
+}
+
 .footer_icon ul{
     display: flex;
     margin: 0;
@@ -107,7 +111,7 @@ header aside span{
     padding: .5rem .5rem;
 }
 
-.footer_icon ul li.active{
+.footer_icon ul li a.active{
     background-color: var(--fourth-color);
 }
 
@@ -200,6 +204,40 @@ header aside span{
     color: var(--firts-color);
     font-family: var(--font-body);
     font-weight: 100;
+}
+
+#form_location #geolocation.show{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#form_location #geolocation.show h3{
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--firts-color);
+    margin-top: 1rem;
+    text-align: center;
+}
+
+#form_location #geolocation.show button{
+    width: 85%;
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: var(--font-body);
+    color: var(--second-color);
+    background-color: var(--firts-color);
+    margin-top: 1rem;
+    padding: .6rem;
+    border-radius: .5rem;
+}
+
+#form_location #geolocation.show button:hover{
+    opacity: .7;
 }
 
 /**/
@@ -445,10 +483,48 @@ transform: rotate(-45deg) translate(35px, 35px);
 @media screen and (max-width: 900px){
     main{
         overflow-y: scroll;
-        background-color: var(--fourth-color);
     }
 
     body{
         background-color: var(--fourth-color);
+    }
+}
+
+@media screen and (min-width: 900px){
+
+    #list_map{
+        display: none;
+    }
+
+    body{
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    main{
+        height: calc(100vh - var(--heigth-header));
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: "sidebar map"
+                            "footer map";
+    }
+
+    #map{
+        grid-area: map;
+    }
+
+    #form_location.show,
+    #summary_table.show{
+        grid-area: sidebar;
+    }
+
+    .footer_icon{
+        grid-area: footer;
+    }
+
+    html{
+        background-color: var(--fifth-color);
     }
 }

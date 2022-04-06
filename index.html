@@ -128,40 +128,88 @@
                 Cercanía a centros de salud Zulia
             </span>
         </aside>
-        <section>
+        <section id="icon_burger">
             <a id="menu_btn_burger" href="#" class="menu_btn_burger">
                 <span class="btn_burger"></span>
             </a>
         </section>
-        <nav class="hide">
-            <ul>
-                <li>
-                    <a class="active" href="#">
-                        <span>Formulario</span>
-                        <svg><use xlink:href="#form_svg"/></svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span>Geolocalización</span>
-                        <svg><use xlink:href="#map_location"/></svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span>Resumen</span>
-                        <svg><use xlink:href="#table_svg"/></svg>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <section id="info">
+            <i class="gg-info"></i>
+            <a>Acerca del proyecto</a>
+        </section>
     </header>
+    <section id="information" class="open">
+        <aside>
+            <h3>
+                <span>Acerca del proyecto</span>
+                <a>x</a>
+            </h3>
+            <section>
+                <p>
+                    Plantilla  de diseño web adaptable  (del ingles <i>responsive web design</i>)  
+                    para crear aplicaciones de mapas web con la <b>API</b> de Google Maps &copy;.
+                </p>
+                <p>
+                    Busque un centro de salud del sistema público nacional de salud  en el estado Zulia, 
+                    que este cerca de usted. Si no conoce la dirección, use uno de estos métodos de búsqueda:
+                </p>
+                <ul>
+                    <li>
+                        <span>
+                            Haga clic en el cuadro de Búsqueda y 
+                            rellene los campos de municipio, parroquia y comunidad. Seleccione un rango de distancia 
+                            hasta un máximo de 2 km.
+                        </span>
+                    </li>
+                    <li>
+                        Usar su ubicación actual haciendo click en Geolocalización. 
+                        La búsqueda se realizara por defecto en un radio de un 1km.
+                    </li>
+                </ul>
+                <p>
+                    Si se encuentra algún centro de salud en ese rango de distancia, aparecerá una lista en el cuadro de resultado.
+                </p>
+                <p>
+                    En la lista haga click sobre cada registro, en el mapa se resaltaran los elementos encontrados.
+                </p>
+                <p>Sobre las tecnologías utilizadas:</p>
+                <ul>
+                    <li>
+                        <abbr 
+                        title="Hypertext Preprocessor" 
+                        class="initialism">PHP</abbr>
+                        como lenguaje de programación Backend para servir 
+                        y gestionar peticiones en el servidor.
+                    </li>
+                    <li>Código fuente almacenado en el repositorio 
+                        <a href="https://github.com/juanfernandez2306/cercania_centro_salud" target="_blank">Github</a>.
+                    </li>
+                    <li>
+                        Ultima actualización de los datos, Diciembre de 2018.
+                    </li>
+                </ul>
+            </section>
+            <footer class="sidebar">
+                <div>
+                    <span class="text-muted">&copy; 2022 Juan Fernandez</span>
+                </div>
+                <div class="icon">
+                    <a href="https://twitter.com/juancho_2306" target="_blank">
+                        <svg><use xlink:href="#twitter"/></svg>
+                    </a>
+                    <a href="http://juanfernandez2306.blogspot.com/" target="_blank">
+                        <svg><use xlink:href="#blogger"/></svg>
+                    </a>
+                </div>
+            </footer>
+        </aside>
+    </section>
     <main>
         <section id="form_location" class="show">
             <nav>
                 <ul>
                     <li>
-                        <a href="#form_dpt" class="active">Formulario</a>
+                        <a href="#form_dpt" class="active">Búsqueda</a>
                     </li>
                     <li>
                         <a href="#geolocation">Geolocalización</a>
@@ -253,18 +301,5 @@
             </li>
         </ul>
     </section>
-    <!--<footer>
-        <div>
-            <span class="text-muted">&copy; 2022 Juan Fernandez</span>
-        </div>
-        <div>
-            <a href="https://twitter.com/juancho_2306" target="_blank">
-                <svg><use xlink:href="#twitter"/></svg>
-            </a>
-            <a href="http://juanfernandez2306.blogspot.com/" target="_blank">
-                <svg><use xlink:href="#blogger"/></svg>
-            </a>
-        </div>
-    </footer>-->
 </body>
 </html>

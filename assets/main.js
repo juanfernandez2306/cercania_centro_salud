@@ -375,6 +375,23 @@ function visualize_map(){
     }
 }
 
+function efect_btn_burger(e){
+    let btn_menu = e.target;
+    let information = selectElement('#information');
+
+    if(e.target.tagName === 'SPAN'){
+        btn_menu = e.target.parentElement;
+    }
+
+    if(btn_menu.classList.contains('open')){
+        btn_menu.classList.remove('open');
+        information.classList.remove('open');
+    }else{
+        btn_menu.classList.add('open');
+        information.classList.add('open');
+    }
+}
+
 function load(){
 
     visualize_map();
@@ -385,14 +402,7 @@ function load(){
 
     selectElement('#form_location nav ul').addEventListener('click', event_btn_form_location, false);
 
-    selectElement('#menu_btn_burger').addEventListener('click', function(e){
-        let btn_menu = e.target;
-        if(btn_menu.classList.contains('open')){
-            btn_menu.classList.remove('open');
-        }else{
-            btn_menu.classList.add('open');
-        }
-    }, false);
+    selectElement('#menu_btn_burger').addEventListener('click', efect_btn_burger, false);
 
     selectElement('#preloader_btn_cancel').addEventListener('click', 
     event_btn_cancel_preloader, false);

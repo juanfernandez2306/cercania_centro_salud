@@ -551,14 +551,6 @@ footer.sidebar div span{
 /*END STYLE SIDEBAR*/
 
 /**/
-#information{
-    position: fixed;
-    z-index: 1200;
-    background-color: var(--firts-color);
-    width: 100vw;
-    transition: 1s all;
-    padding: 1rem;
-}
 
 #information.open aside section p{
     font-size: 1.1rem;
@@ -598,6 +590,12 @@ footer.sidebar div span{
     }
 
     #information{
+        position: fixed;
+        z-index: 1200;
+        background-color: var(--firts-color);
+        width: 100vw;
+        transition: 1s all;
+        padding: 1rem;
         top: var(--heigth-header);
         left: 100vw;
         height: calc(100% - var(--heigth-header));
@@ -634,10 +632,6 @@ footer.sidebar div span{
 
 @media screen and (min-width: 900px){
 
-    #information_movil{
-        display: none;
-    }
-
     header aside span{
         width: 100%;
         font-size: 1.2rem;
@@ -656,6 +650,7 @@ footer.sidebar div span{
         font-family: var(--font-body);
         margin-left: .5rem;
         font-size: 1.2rem;
+        cursor: pointer;
     }
 
     #list_map{
@@ -695,7 +690,12 @@ footer.sidebar div span{
         background-color: var(--fifth-color);
     }
 
-    #information{
+    #information.open{
+        position: fixed;
+        z-index: 1200;
+        width: 100vw;
+        transition: 1s all;
+        left: 0;
         display: grid;
         place-items: center;
         height: 100vh;
@@ -704,10 +704,11 @@ footer.sidebar div span{
         background-color: rgba(3, 3, 3, 0.8);
     }
 
-    #information aside{
+    #information.open aside{
         background-color: var(--firts-color);
         padding: 1rem 2rem;
         border-radius: 1rem;
+        max-width: 1000px;
     }
 
     #information.open aside section{

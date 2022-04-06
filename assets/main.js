@@ -392,13 +392,50 @@ function efect_btn_burger(e){
     }
 }
 
+function remove_class_hide_info(e){
+    if(window.matchMedia(text_media_query).matches == false){
+        selectElement('#information').classList.remove('hide');
+    }else{
+        if(selectElement('#information').classList.contains('show') == false){
+            selectElement('#information').classList.add('hide');
+        }
+    }
+}
+
 function load(){
 
+    remove_class_hide_info();
     visualize_map();
     move_footer_icon();
 
+    window.addEventListener('resize', remove_class_hide_info, false);
     window.addEventListener('resize', visualize_map, false);
     window.addEventListener('resize', move_footer_icon, false);
+
+    selectElement('#info').addEventListener('click', (e) => {
+        e.preventDefault();
+        selectElement('#information').classList.remove('hide');
+        selectElement('#information').classList.add('open');
+
+        selectElement('body').style['animation-name'] = 'fade_in_data';
+
+        setTimeout(() => {
+            selectElement('body').style['animation-name'] = '';
+        }, 1000);
+
+    }, false);
+
+    selectElement('#close_info').addEventListener('click', (e) => {
+        e.preventDefault();
+        selectElement('#information').classList.remove('open');
+        selectElement('#information').classList.add('hide');
+
+        selectElement('body').style['animation-name'] = 'fade_in_data';
+
+        setTimeout(() => {
+            selectElement('body').style['animation-name'] = '';
+        }, 1000);
+    }, false);
 
     selectElement('#form_location nav ul').addEventListener('click', event_btn_form_location, false);
 

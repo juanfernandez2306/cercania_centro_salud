@@ -1,4 +1,16 @@
+@font-face {
+    font-family: Nunito;
+    src: url(../../complementos/font/Nunito/Nunito-Bold.ttf);
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(../../complementos/font/roboto/RobotoCondensed-Light.ttf);
+}
+
 :root{
+    --font-header: Nunito, Arial, Helvetica, sans-serif;
+    --font-body: Roboto, Arial, Helvetica, sans-serif;
     --height-header: 3.5rem;
     --firts-color: #22577E;
     --second-color: #DFDFDE;
@@ -31,12 +43,6 @@ symbol.active g g path,
 symbol.active g rect,
 symbol.active g polygon{
     fill: var(--firts-color);
-}
-
-header svg,
-footer svg{
-    width: 2.5rem;
-    height: 2.5rem;
 }
 
 header{
@@ -72,7 +78,37 @@ footer ul li a.active{
 }
 /*END STYLE FOOTER*/
 
+header{
+    font-size: 1.2rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--second-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+header aside{
+    display: flex;
+    align-items: center;
+}
+
+header aside span{
+    margin-left: .5rem;
+}
+
+.list_optional{
+    display: none;
+}
+
 @media all and (max-width: 900px){
+    header svg,
+    footer svg{
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
     main{
         grid-template-rows: auto 1fr auto;
         grid-template-areas:    "header"
@@ -82,16 +118,6 @@ footer ul li a.active{
 
     header{
         grid-area: header;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding-left: 1rem;
-        color: var(--second-color);
-    }
-
-    header aside{
-        display: flex;
-        align-items: center;
     }
 
     footer{
@@ -109,6 +135,18 @@ footer ul li a.active{
 }
 
 @media all and (min-width: 900px){
+    header svg,
+    footer svg{
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+
+    aside.btn_info svg{
+        width: 1.4rem;
+        height: 1.4rem;
+        margin-right: .5rem;
+    }
+
     main{
         grid-template-rows: auto 1fr auto;
         grid-template-columns: 1fr 1fr;
@@ -122,6 +160,16 @@ footer ul li a.active{
 
     header{
         grid-area: header;
+    }
+
+    header{
+        justify-content: space-between;
+        padding-right: 1rem;
+    }
+
+    header aside.btn_info a{
+        color: var(--second-color);
+        text-decoration: none;
     }
 
     footer{
@@ -139,6 +187,10 @@ footer ul li a.active{
     }
 
     li#list_map{
+        display: none;
+    }
+
+    li#list_info{
         display: none;
     }
 

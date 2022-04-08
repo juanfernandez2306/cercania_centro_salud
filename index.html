@@ -7,6 +7,7 @@
     <title>Cercania Centros de Salud</title>
 
     <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/main.js"></script>
 </head>
 <body>
     <svg style="display: none;">
@@ -110,6 +111,14 @@
                 <path d="M27,28H5c-0.6,0-1,0.4-1,1s0.4,1,1,1h22c0.6,0,1-0.4,1-1S27.6,28,27,28z"/>
             </g>
         </symbol>
+        <symbol id="info" x="0px" y="0px" viewBox="0 0 494.572 494.572">
+            <path d="M257.063,0C127.136,0,21.808,105.33,21.808,235.266c0,41.012,10.535,79.541,28.973,113.104L3.825,464.586
+	        c-3.285,8.118-1.391,17.402,4.799,23.593c6.176,6.19,15.47,8.085,23.586,4.802l118.707-47.953
+	        c31.933,16.186,67.912,25.504,106.146,25.504c129.945,0,235.275-105.33,235.275-235.266S387.009,0,257.063,0z M256.804,94.852
+	        c22.865,0,41.403,18.538,41.403,41.404s-18.538,41.403-41.403,41.403c-22.865,0-41.406-18.537-41.406-41.403
+	        S233.938,94.852,256.804,94.852z M298.616,356.496c0,10.6-8.592,19.191-19.191,19.191h-45.243c-10.6,0-19.19-8.591-19.19-19.191
+	        V198.312c11.939,8.077,26.345,12.797,41.813,12.797c15.467,0,29.872-4.721,41.813-12.797V356.496z"/>
+        </symbol>
     </svg>
     <main>
         <header>
@@ -120,6 +129,7 @@
                 </span>
             </aside>
             <aside class="btn_info">
+                <svg><use xlink:href="#info"/></svg>
                 <a href="#">Acerca del Proyecto</a>
             </aside>
         </header>
@@ -127,21 +137,26 @@
         <footer>
             <ul>
                 <li>
-                    <a class="active" href="#form_location">
+                    <a id="form_location" class="active init" href="#form_location">
                         <svg><use xlink:href="#form_svg"/></svg>
                     </a>
                 </li>
-                <li>
+                <li id="list_info">
+                    <a href="#information">
+                        <svg><use xlink:href="#info"/></svg>
+                    </a>
+                </li>
+                <li class="list_optional">
                     <a href="#summary_table">
                         <svg><use xlink:href="#table_svg"/></svg>
                     </a> 
                 </li>
-                <li id="list_map">
+                <li id="list_map" class="list_optional">
                     <a href="#map">
                         <svg><use xlink:href="#map_location"/></svg>
                     </a>
                 </li>
-                <li>
+                <li class="list_optional">
                     <a href="#delete">
                         <svg><use xlink:href="#eraser"/></svg>
                     </a>

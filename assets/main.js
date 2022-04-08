@@ -28,15 +28,27 @@ async function get_post_data_json(url, FormData_input){
     return data;
 }
 
-function load_select(data_municipality){
+function load_input_select({
+    data_municipality,
+    selectMunicipality,
+    selectParish,
+    selectCommunity,
+    selectDistance
+}){
 
-    let selectMunicipality = new Choices('#municipality', {
-        choices: data_municipality
-    });
+    selectMunicipality.setChoices(data_municipality);
 
-    let selectParish = new Choices('#parish');
-    let selectCommunity = new Choices('#community');
-    let selectDistance = new Choices('#distance');
+    let data_distance_urban = [{label: '---', value: '', selected: true},
+    {label: '200', value: '200'}, {label: '400', value: '400'},
+    {label: '600', value: '600'}, {label: '800', value: '800'},
+    {label: '1000', value: '1000'}
+    ];
+
+    let data_distance_rural = [{label: '---', value: '', selected: true},
+    {label: '400', value: '400'}, {label: '800', value: '800'},
+    {label: '1000', value: '1000'}, {label: '1500', value: '1500'},
+    {label: '2000', value: '2000'}
+    ];
 
     selectElement('#municipality').addEventListener('change', (e)=>{
         let selectInput = e.target;
@@ -48,6 +60,14 @@ function load_select(data_municipality){
         selectParish.disable();
         selectCommunity.clearStore();
         selectCommunity.disable();
+        selectDistance.clearStore();
+        selectDistance.disable();
+
+        if(cod_mun == 2313 || cod_mun == 2317){
+            selectDistance.setChoices(data_distance_urban)
+        }else{
+            selectDistance.setChoices(data_distance_rural);
+        }
         
         
         const url_parish = 'assets/php/create_list_parish.php';
@@ -72,6 +92,7 @@ function load_select(data_municipality){
 
         selectCommunity.clearChoices();
         selectCommunity.disable();
+        selectDistance.enable();
 
         const url_community = 'assets/php/create_list_community.php';
         get_post_data_json(url_community, FormDataInput)
@@ -91,7 +112,6 @@ function load_select(data_municipality){
 
 const initial_coordinates = {lat: 10.90847, lng: -72.08446};
 
-/*
 function initMap(){
     // The map, centered at Uluru
     const map = new google.maps.Map(document.getElementById("map"), {
@@ -102,6 +122,75 @@ function initMap(){
     return map;
 }
 
+function load_data_map(data_response, map){
+    let data_community = data_response.community;
+    let data_tbody = data_response.establishment;
+    newCenter = {lat: data_community.lat, lng: data_community.lng};
+    
+    let svgMarker = {
+        path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+        fillColor: selectVariableCSS('--firts-color'),
+        fillOpacity: 1,
+        strokeWeight: 0,
+        rotation: 0,
+        scale: 2,
+        anchor: new google.maps.Point(15, 30),
+      };
+    
+
+    let markers = [];
+
+    data_tbody.forEach((element) => {
+        var contentString = `<h3 class="text_popup">${element.name}</h3>`;
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString,
+        });
+
+        var latlng = {lat: element.lat, lng: element.lng};
+
+        var marker = new google.maps.Marker({
+            position: latlng,
+            map,
+            icon: svgMarker,
+            title: element.name
+        })
+
+        marker.addListener("click", () => {
+            infowindow.open({
+              anchor: marker,
+              map,
+              shouldFocus: false,
+            });
+          });
+        
+        
+        markers.push(marker);
+    })
+
+    let circle = new google.maps.Circle({
+        strokeColor: selectVariableCSS('--color-error'),
+        strokeOpacity: 0.6,
+        strokeWeight: 2,
+        fillColor: selectVariableCSS('--color-error'),
+        fillOpacity: 0.35,
+        map,
+        center: newCenter,
+        radius: 1000
+    });
+
+    markers.push(circle);
+
+    let bounds = circle.getBounds();
+    console.log(bounds);
+
+    map.fitBounds(bounds);
+
+    /*
+    map.setCenter(newCenter);
+    map.setZoom(15);
+    */
+    console.log(markers);
+}
 
 function load_data_response(data_response, map){
     let tbody = selectElement('#summary_table tbody');
@@ -161,8 +250,6 @@ function load_data_response(data_response, map){
     console.log(markers);
     
 }
-
-*/
 
 function create_data_table(data_response, map){
     let tbody = selectElement('#summary_table tbody');
@@ -454,7 +541,28 @@ function load(){
     let community = new Choices('#community');
     let distance = new Choices('#distance');
 
+    const url_municipality = 'assets/php/create_list_municipality.php';
+
+    let map = initMap();
+
+    get_data_json(url_municipality)
+    .then(response =>{
+        if(response.response){
+            load_input_select({
+                data_municipality: response.data,
+                selectMunicipality: munipality,
+                selectParish: parish,
+                selectCommunity: community,
+                selectDistance: distance
+            });
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    })
+
     create_data_table(data_test, null);
+    load_data_map(data_test, map);
 }
 
 window.addEventListener('load', load, false);

@@ -116,8 +116,15 @@ main{
 }
 
 #map.show{
-    background-color: yellowgreen;
     height: 100%;
+}
+
+.text_popup{
+    font-size: 1rem;
+    font-family: var(--font-header);
+    font-weight: 700;
+    color: var(--firts-color);
+    text-align: center;
 }
 
 /*STYLE NAV FORM LOCATION*/

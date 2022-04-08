@@ -1,22 +1,12 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cercania</title>
-    
-    <!--<script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAM9cbWcbs4jPW9OFLMmFbiBM0pAX8Gbh8&callback=initMap&v=weekly"
-    async
-    ></script>-->
-    
-    <script src="assets/data_test.js"></script>
-    <link rel="stylesheet" href="../complementos/choice/choices.css">
-    <script src="../complementos/choice/choices.min.js"></script>
-    <link rel="stylesheet" href="../complementos/choice/base.min.css">
-    <link rel="stylesheet" href="assets/main.css">
-    <script src="assets/main.js"></script>
+    <title>Cercania Centros de Salud</title>
+
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
     <svg style="display: none;">
@@ -121,185 +111,43 @@
             </g>
         </symbol>
     </svg>
-    <header>
-        <aside>
-            <svg><use xlink:href="#map_header"/></svg>
-            <span>
-                Cercanía a centros de salud Zulia
-            </span>
-        </aside>
-        <section id="icon_burger">
-            <a id="menu_btn_burger" href="#" class="menu_btn_burger">
-                <span class="btn_burger"></span>
-            </a>
-        </section>
-        <section id="info">
-            <i class="gg-info"></i>
-            <a>Acerca del proyecto</a>
-        </section>
-    </header>
-    <section id="information" class="hide">
-        <aside>
-            <h3>
-                <span>Acerca del proyecto</span>
-                <a id="close_info">x</a>
-            </h3>
-            <section>
-                <p>
-                    Plantilla  de diseño web adaptable  (del ingles <i>responsive web design</i>)  
-                    para crear aplicaciones de mapas web con la <b>API</b> de Google Maps &copy;.
-                </p>
-                <p>
-                    Busque un centro de salud del sistema público nacional de salud  en el estado Zulia, 
-                    que este cerca de usted. Si no conoce la dirección, use uno de estos métodos de búsqueda:
-                </p>
-                <ul>
-                    <li>
-                        <span>
-                            Haga clic en el cuadro de <b>Búsqueda</b> y 
-                            rellene los campos de municipio, parroquia y comunidad. Seleccione un rango de distancia 
-                            hasta un máximo de 2 km en zonas rurales y un 1 km en zonas urbanas.
-                        </span>
-                    </li>
-                    <li>
-                        Usar su ubicación actual haciendo click en <b>Geolocalización</b>. 
-                        La búsqueda se realizara por defecto en un radio de un 1km.
-                    </li>
-                </ul>
-                <p>
-                    Si se encuentra algún centro de salud en ese rango de distancia, aparecerá una lista en el cuadro de resultado.
-                </p>
-                <p>
-                    En la lista haga click sobre cada registro, en el mapa se resaltaran los elementos encontrados.
-                </p>
-                <p>Sobre las tecnologías utilizadas:</p>
-                <ul>
-                    <li>
-                        <abbr 
-                        title="Hypertext Preprocessor" 
-                        class="initialism">PHP</abbr>
-                        como lenguaje de programación Backend para servir 
-                        y gestionar peticiones en el servidor.
-                    </li>
-                    <li>Código fuente almacenado en el repositorio 
-                        <a href="https://github.com/juanfernandez2306/cercania_centro_salud" target="_blank">Github</a>.
-                    </li>
-                    <li>
-                        Ultima actualización de los datos, Diciembre de 2018.
-                    </li>
-                </ul>
-            </section>
-            <footer class="sidebar">
-                <div>
-                    <span class="text-muted">&copy; 2022 Juan Fernandez</span>
-                </div>
-                <div class="icon">
-                    <a href="https://twitter.com/juancho_2306" target="_blank">
-                        <svg><use xlink:href="#twitter"/></svg>
-                    </a>
-                    <a href="http://juanfernandez2306.blogspot.com/" target="_blank">
-                        <svg><use xlink:href="#blogger"/></svg>
-                    </a>
-                </div>
-            </footer>
-        </aside>
-    </section>
     <main>
-        <section id="form_location" class="show">
-            <nav>
-                <ul>
-                    <li>
-                        <a href="#form_dpt" class="active">Búsqueda</a>
-                    </li>
-                    <li>
-                        <a href="#geolocation">Geolocalización</a>
-                    </li>
-                </ul>
-            </nav>
-            <aside id="form_dpt" class="show">
-                <form>
-                    <section class="group_items">
-                        <label>Municipio</label>
-                        <select id="municipality" required></select>
-                    </section>
-                    <section class="group_items">
-                        <label>Parroquia</label>
-                        <select id="parish" disabled required></select>
-                    </section>
-                    <section class="group_items">
-                        <label>Comunidad</label>
-                        <select id="community" disabled name="id_comunidad" required></select>
-                    </section>
-                    <section class="group_items">
-                        <label>Selecciona el rango de distancia (metros)</label>
-                        <select name="distance" id="distance">
-                            <option value="">---</option>
-                            <option class="items_urbano" value="0.2">200 metros</option>
-                            <option class="items_urbano" value="0.5">500 metros</option>
-                            <option class="items_urbano" value="0.8">800 metros</option>
-                            <option value="1">1 km</option>
-                            <option class="items_rural" value="1.5">1.5 km</option>
-                            <option class="items_rural" value="2">2 km</option>
-                        </select>
-                    </section>
-                    <section class="group_submit">
-                        <input type="submit" value="Consultar" disabled>
-                    </section>
-                </form>
+        <header>
+            <aside>
+                <svg><use xlink:href="#map_header"/></svg>
+                <span>
+                    Cercanía a centros de salud Zulia
+                </span>
             </aside>
-            <aside id="geolocation" class="hide">
-                <h3>Localización del dispositivo  en una radio de 1 km de distancia.</h3>
-                <button>Iniciar</button>
+            <aside class="btn_info">
+                <a href="#">Acerca del Proyecto</a>
             </aside>
-        </section>
-        <section id="summary_table" class="hide">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ESTABLECIMIENTOS</th>
-                        <th colspan="2">DISTANCIA (METROS)</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </section>
-        <section id="map" class="hide"></section>
+        </header>
+        <div id="map"></div>
+        <footer>
+            <ul>
+                <li>
+                    <a class="active" href="#form_location">
+                        <svg><use xlink:href="#form_svg"/></svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="#summary_table">
+                        <svg><use xlink:href="#table_svg"/></svg>
+                    </a> 
+                </li>
+                <li id="list_map">
+                    <a href="#map">
+                        <svg><use xlink:href="#map_location"/></svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="#delete">
+                        <svg><use xlink:href="#eraser"/></svg>
+                    </a>
+                </li>
+            </ul>
+        </footer>
     </main>
-    <section id="delete" class="hide">
-        <section class="preloader_delete">
-            <label>
-                <div class="gg-trash"></div>
-            </label>
-            <h3>¿Desea eliminar la consulta actual?</h3>
-            <section>
-                <button id="preloader_btn_confirm" class="confirm">Confirmar</button>
-                <button id="preloader_btn_cancel" class="cancel">Cancelar</button>
-            </section>
-        </section>
-    </section>
-    <section class="footer_icon">
-        <ul>
-            <li>
-                <a class="active" href="#form_location">
-                    <svg><use xlink:href="#form_svg"/></svg>
-                </a>
-            </li>
-            <li>
-                <a href="#summary_table">
-                    <svg><use xlink:href="#table_svg"/></svg>
-                </a> 
-            </li>
-            <li id="list_map">
-                <a href="#map">
-                    <svg><use xlink:href="#map_location"/></svg>
-                </a>
-            </li>
-            <li>
-                <a href="#delete">
-                    <svg><use xlink:href="#eraser"/></svg>
-                </a>
-            </li>
-        </ul>
-    </section>
 </body>
 </html>

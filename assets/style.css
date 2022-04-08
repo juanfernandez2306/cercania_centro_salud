@@ -1,0 +1,145 @@
+:root{
+    --height-header: 3.5rem;
+    --firts-color: #22577E;
+    --second-color: #DFDFDE;
+}
+
+body{
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    font-size: 16px;
+}
+
+main{
+    display: grid;
+    width: 100%;
+    height: 100%;
+}
+
+symbol path,
+symbol g path,
+symbol g g path,
+symbol g rect,
+symbol g polygon{
+    fill: var(--second-color);
+}
+
+symbol.active path,
+symbol.active g path,
+symbol.active g g path,
+symbol.active g rect,
+symbol.active g polygon{
+    fill: var(--firts-color);
+}
+
+header svg,
+footer svg{
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+header{
+    background-color: var(--firts-color);
+    height: var(--height-header);
+}
+
+/*STYLE FOOTER*/
+footer{
+    background-color: var(--firts-color);
+}
+
+footer ul{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer li{
+    flex-grow: 1;
+    text-align: center;
+}
+
+footer ul li a{
+    text-decoration: none;
+    display: block;
+    padding: 1rem 1rem;
+}
+
+footer ul li a.active{
+    background-color: var(--second-color);
+}
+/*END STYLE FOOTER*/
+
+@media all and (max-width: 900px){
+    main{
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:    "header"
+                                "main"
+                                "footer";
+    }
+
+    header{
+        grid-area: header;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-left: 1rem;
+        color: var(--second-color);
+    }
+
+    header aside{
+        display: flex;
+        align-items: center;
+    }
+
+    footer{
+        grid-area: footer;
+    }
+
+    .main_show{
+        grid-area: main;
+    }
+
+    aside.btn_info{
+        display: none;
+    }
+    
+}
+
+@media all and (min-width: 900px){
+    main{
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:    "header header"
+                                "main map"
+                                "footer map";
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    header{
+        grid-area: header;
+    }
+
+    footer{
+        grid-area: footer;
+    }
+
+    .main_show{
+        grid-area: main;
+    }
+
+    #map{
+        grid-area: map;
+        height: 100%;
+        background-color: chartreuse;
+    }
+
+    li#list_map{
+        display: none;
+    }
+
+}

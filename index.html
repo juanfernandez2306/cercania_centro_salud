@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cercania Centros de Salud</title>
 
+    <!--
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.1/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.1/dist/js/tom-select.complete.min.js"></script>
+    -->
+
+    <link rel="stylesheet" href="../complementos/tom-select/tom-select.css">
+    <script src="../complementos/tom-select/tom-select.complete.min.js"></script>
+
     <link rel="stylesheet" href="assets/style.css">
     <script src="assets/main.js"></script>
 </head>
@@ -120,6 +128,75 @@
 	        V198.312c11.939,8.077,26.345,12.797,41.813,12.797c15.467,0,29.872-4.721,41.813-12.797V356.496z"/>
         </symbol>
     </svg>
+    <section id="wallpaper" class="hide"></section>
+    <section id="screen"></section>
+    <section id="information" class="hide">
+        <section class="header">
+            <span>Acerca del proyecto</span>
+            <a class="close_btn_info">&times;</a>
+        </section>
+        <section class="main">
+            <p>
+                Plantilla  de diseño web adaptable  (<i>responsive web design</i>)  
+                para crear aplicaciones de mapas web con la <b>API</b> de Google Maps &copy;.
+            </p>
+            <p>
+                Busque un centro de salud del sistema público nacional de salud  en el estado Zulia, 
+                que este cerca de usted. Si no conoce la dirección, use uno de estos métodos de búsqueda:
+            </p>
+            <ul>
+                <li>
+                    Haga clic en el cuadro de <b>Búsqueda</b> y 
+                    rellene los campos de municipio, parroquia y comunidad. Seleccione un rango de distancia 
+                    hasta un máximo de 2 km en zonas rurales y un 1 km en zonas urbanas.
+                </li>
+                <li>
+                    Usar su ubicación actual haciendo click en <b>Geolocalización</b>. 
+                    La búsqueda se realizara por defecto en un radio de un 1km.
+                </li>
+            </ul>
+            <p>
+                Si se encuentra algún centro de salud en ese rango de distancia, aparecerá una lista en el cuadro de resultado.
+            </p>
+            <p>
+                En la lista haga click sobre cada registro, en el mapa se resaltaran los elementos encontrados.
+            </p>
+            <p>Sobre las tecnologías utilizadas:</p>
+            <ul>
+                <li>
+                    <abbr 
+                    title="Hypertext Preprocessor" 
+                    class="initialism">PHP</abbr>
+                    como lenguaje de programación Backend para servir 
+                    y gestionar peticiones en el servidor.
+                </li>
+                <li>
+                    <span></span>
+                    Código fuente almacenado en el repositorio 
+                    <a href="https://github.com/juanfernandez2306/cercania_centro_salud" target="_blank">Github</a>.
+                </li>
+                <li>
+                    Ultima actualización de los datos, Diciembre de 2018.
+                </li>
+            </ul>
+            <aside class="contact">
+                <div>
+                    <span class="text-muted">&copy; 2022 Juan Fernandez</span>
+                </div>
+                <div class="icon">
+                    <a href="https://twitter.com/juancho_2306" target="_blank">
+                        <svg><use xlink:href="#twitter"/></svg>
+                    </a>
+                    <a href="http://juanfernandez2306.blogspot.com/" target="_blank">
+                        <svg><use xlink:href="#blogger"/></svg>
+                    </a>
+                </div>
+            </aside>
+        </section>
+        <section class="footer">
+            <button class="close_btn_info">Cerrar</button>
+        </section>
+    </section>
     <main>
         <header>
             <aside>
@@ -130,14 +207,54 @@
             </aside>
             <aside class="btn_info">
                 <svg><use xlink:href="#info"/></svg>
-                <a href="#">Acerca del Proyecto</a>
+                <a id="btn_info_web" href="#">Acerca del Proyecto</a>
             </aside>
         </header>
+        <section id="form_location" class="show">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#query_location" class="active">Búsqueda</a>
+                    </li>
+                    <li>
+                        <a href="#geolocation">Geolocalización</a>
+                    </li>
+                </ul>
+            </nav>
+            <form id="query_location" class="show">
+                <section class="group_items">
+                    <label>Municipio</label>
+                    <select id="municipality" required></select>
+                </section>
+                <section class="group_items">
+                    <label>Parroquia</label>
+                    <select id="parish" disabled required></select>
+                </section>
+                <section class="group_items">
+                    <label>Comunidad</label>
+                    <select id="community" disabled name="id_comunidad" required></select>
+                </section>
+                <section class="group_items">
+                    <label>Selecciona el rango de distancia (metros)</label>
+                    <select name="distance" id="distance" disabled></select>
+                </section>
+                <section class="group_submit">
+                    <input type="submit" value="Consultar" disabled>
+                </section>
+            </form>
+                
+            <aside id="geolocation" class="hide">
+                <h3>Localización del dispositivo  en una radio de 1 km de distancia.</h3>
+                <button>Iniciar</button>
+            </aside>
+            
+        </section>
+        <section id="summary_table" class="hide"></section>
         <div id="map"></div>
         <footer>
             <ul>
                 <li>
-                    <a id="form_location" class="active init" href="#form_location">
+                    <a id="link_location" class="active init" href="#form_location">
                         <svg><use xlink:href="#form_svg"/></svg>
                     </a>
                 </li>

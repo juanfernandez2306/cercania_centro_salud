@@ -275,7 +275,7 @@ function create_option_distance_parish(select_distance){
         let data = [{value: '', text: '---'}];
         let n = 0;
         for(var x = 0; x <= indice; x++){
-            n += 200;
+            n += 400;
             data.push({text: n, value: n});
         }
 
@@ -298,6 +298,7 @@ function combobox_community(select_distance){
 }
 
 function load(){
+
     status_init_form();
     window.addEventListener('resize', status_init_form, false);
 
@@ -357,6 +358,23 @@ function load(){
     combobox_parish(community, distance);
     create_option_distance_parish(distance);
     combobox_community(distance);
+
+    selectElement('#query_location').addEventListener('submit', (e) => {
+        e.preventDefault();
+        let form = new FormData(e.target);
+
+        get_post_data_json(
+            'assets/php/create_list_establishment_health.php',
+            form
+        )
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+
+    }, false);
 
 
 }

@@ -220,6 +220,10 @@ header aside span{
     font-weight: 700;
 }
 
+#geolocation.show button{
+    max-width: 200px;
+}
+
 #query_location.show section.group_submit input:hover,
 #geolocation.show button:hover{
     opacity: .7;

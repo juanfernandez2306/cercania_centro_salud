@@ -561,22 +561,6 @@ function load(){
                     map.setZoom(18);
                 }, wait_time_sidebar);
                 
-
-                /*
-                
-                button.addEventListener('click', function(e){
-                    let btn = e.target;
-                    btn.disabled = true;
-                    selectElement('#map').scrollIntoView({ 
-                        behavior: 'smooth' 
-                    });
-                    setTimeout(() =>{
-                        map.setCenter(location);
-                        map.setZoom(18);
-                        btn.removeAttribute('disabled')
-                    }, 1000);
-                }, false);
-                */
             }
         }
     }, false);

@@ -11,6 +11,11 @@
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.1/dist/js/tom-select.complete.min.js"></script>
     -->
 
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAM9cbWcbs4jPW9OFLMmFbiBM0pAX8Gbh8&callback=initMap&v=weekly"
+    async
+    ></script>
+
     <link rel="stylesheet" href="../complementos/tom-select/tom-select.css">
     <script src="../complementos/tom-select/tom-select.complete.min.js"></script>
 
@@ -249,8 +254,18 @@
             </aside>
             
         </section>
-        <section id="summary_table" class="hide"></section>
-        <div id="map"></div>
+        <section id="summary_table" class="hide">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ESTABLECIMIENTOS</th>
+                        <th colspan="2">DISTANCIA (METROS)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+        <section id="map"></section>
         <footer>
             <ul>
                 <li>
@@ -263,17 +278,17 @@
                         <svg><use xlink:href="#info"/></svg>
                     </a>
                 </li>
-                <li class="list_optional">
+                <li class="list_optional hide">
                     <a href="#summary_table">
                         <svg><use xlink:href="#table_svg"/></svg>
                     </a> 
                 </li>
-                <li id="list_map" class="list_optional">
+                <li id="list_map" class="list_optional hide">
                     <a href="#map">
                         <svg><use xlink:href="#map_location"/></svg>
                     </a>
                 </li>
-                <li class="list_optional">
+                <li class="list_optional hide">
                     <a href="#delete">
                         <svg><use xlink:href="#eraser"/></svg>
                     </a>

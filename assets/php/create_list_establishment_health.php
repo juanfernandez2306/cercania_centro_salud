@@ -54,8 +54,8 @@
     }
 
     $filter_data = array_filter(array(
-        'id_comunidad' => isset($_POST['id_comunidad']) ? validation_input_integer($_POST['id_comunidad']) : 2182,
-        'distance' => isset($_POST['distance']) ? validation_limit_distance($_POST['distance']) : 3000
+        'id_comunidad' => isset($_POST['id_comunidad']) ? validation_input_integer($_POST['id_comunidad']) : null,
+        'distance' => isset($_POST['distance']) ? validation_limit_distance($_POST['distance']) : null
     ), 'returns_data_not_null');
 
     if(count($filter_data) == 2){

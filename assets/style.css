@@ -1,20 +1,12 @@
-@font-face {
-    font-family: Nunito;
-    src: url(../../complementos/font/Nunito/Nunito-Bold.ttf);
-}
-
-@font-face {
-    font-family: Roboto;
-    src: url(../../complementos/font/roboto/RobotoCondensed-Light.ttf);
-}
-
 :root{
-    --font-header: Nunito, Arial, Helvetica, sans-serif;
-    --font-body: Roboto, Arial, Helvetica, sans-serif;
+    --font-header: 'Roboto Condensed', Arial, Helvetica, sans-serif;
+    --font-body: 'Nunito', Arial, Helvetica, sans-serif;
     --height-header: 3.5rem;
     --firts-color: #22577E;
     --second-color: #DFDFDE;
     --third-color: #FF8AAE;
+    --fourth-color: #EDE6DB;
+    --app-height: 100%;
 }
 
 .hide{
@@ -59,10 +51,16 @@ body{
     font-size: 16px;
 }
 
+@keyframes fade_in_data{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
 main{
     display: grid;
     width: 100%;
     height: 100%;
+    animation-duration: .7s;
 }
 
 symbol path,
@@ -366,15 +364,15 @@ header aside span{
 #summary_table.show{
     margin-top: 1rem;
     margin-bottom: 1rem;
-    display: flex;
-    justify-content: center;
     overflow-y: scroll;
     font-family: var(--font-body);
 }
 
 #summary_table.show table{
     table-layout: fixed;
-    width: 95%;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
     border-collapse: collapse;
     border: 3px solid var(--firts-color);
 }
@@ -387,6 +385,7 @@ header aside span{
 
 #summary_table.show table thead tr th{
     text-align: center;
+    padding: .5rem;
 }
 
 #summary_table.show table thead th:nth-child(1){
@@ -397,7 +396,7 @@ header aside span{
     color: var(--firts-color);
 }
 
-#summary_table.show table tbody tr{
+#summary_table.show table tbody tr td{
     padding-top: 1rem;
     padding-bottom: 1rem;
     font-size: 1rem;
@@ -432,10 +431,367 @@ header aside span{
 
 /**/
 
+/**/
+#delete.show{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-duration: .7s;
+}
+
+#delete.show .preloader_delete{
+    background-color: var(--second-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    gap: 1rem;
+    text-align: center;
+    border-radius: .5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#delete.show .preloader_delete label{
+    color: red;
+}
+
+#delete.show .preloader_delete h3{
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: normal;
+    font-family: var(--font-body);
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+#delete.show .preloader_delete section button{
+    padding: .5rem;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    border-radius: .5rem;
+}
+
+#delete.show .preloader_delete section button.cancel{
+    background-color: #D8D2CB;
+    color: #000;
+}
+
+#delete.show .preloader_delete section button.confirm{
+    background-color: var(--firts-color);
+    color: var(--second-color);
+    margin-right: 1rem;
+}
+
+#delete.show .preloader_delete section button:hover{
+    opacity: .7;
+}
+
+/**/
+.gg-trash {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(2.5);
+    width: 10px;
+    height: 12px;
+    border: 2px solid transparent;
+    box-shadow:
+        0 0 0 2px,
+        inset -2px 0 0,
+        inset 2px 0 0;
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 1px;
+    margin-top: 4px
+}
+
+.gg-trash::after,
+.gg-trash::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+}
+
+.gg-trash::after {
+    background: currentColor;
+    border-radius: 3px;
+    width: 16px;
+    height: 2px;
+    top: -4px;
+    left: -5px
+}
+
+.gg-trash::before {
+    width: 10px;
+    height: 4px;
+    border: 2px solid;
+    border-bottom: transparent;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    top: -7px;
+    left: -2px
+}
+
+/*class preloader wallpaper*/
+#response_preloader.show{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-duration: .7s;
+}
+
+.preloader_wallpaper{
+    background-color: var(--fourth-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    border-radius: .5rem;
+}
+
+.preloader_wallpaper h3{
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: var(--firts-color);
+    font-family: var(--font-body);
+}
+
+:root{
+    --label-preloader: 5rem;
+    --width-icon: 1.12rem;
+    --heigth-icon: 2.24rem;
+    --left-icon: 1.12rem;
+}
+
+@keyframes rotate{
+    50%{
+        border-left-color: var(--fourth-color);
+    }
+    75%{
+        border-left-color: var(--firts-color);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.preloader_wallpaper label{
+    position: relative;
+    height: var(--label-preloader);
+    width: var(--label-preloader);
+    display: inline-block;
+    border-radius: 50%;
+    animation: rotate 1.2s linear infinite;
+    border: 2px solid var(--second-color);
+    opacity: .5;
+    border-left-color: var(--firts-color);
+}
+
+.preloader_wallpaper label .check-icon{
+    display: none;
+}
+
+@keyframes check-icon{
+    0%{
+        height: 0;
+        width: 0;
+        opacity: 1;
+    }
+    20%{
+        height: 0;
+        width: var(--width-icon);
+        opacity: 1;
+    }
+    40%{
+        height: var(--heigth-icon);
+        width: var(--width-icon);
+        opacity: 1;
+    }
+    100%{
+        height: var(--heigth-icon);
+        width: var(--width-icon);
+        opacity: 1;
+    }
+}
+
+.preloader_wallpaper.success label .check-icon:after{
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: var(--left-icon);
+    transform: scaleX(-1) rotate(135deg);
+    border-top: 4px solid var(--firts-color);
+    border-right: 4px solid var(--firts-color);
+    height: var(--heigth-icon);
+    width: var(--width-icon);
+    transform-origin: left top;
+    animation: check-icon 0.8s ease;
+}
+
+@keyframes error-icon {
+    0%{font-size: .5rem;}
+    50%{font-size: 2.5rem;}
+    100%{font-size: .5rem;}
+}
+
+.preloader_wallpaper.error label .check-icon:after{
+    color: red;
+    content: "\274c";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    line-height: var(--label-preloader);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 100;
+    font-family: Arial, Helvetica, sans-serif;
+    animation: error-icon 0.8s ease;
+}
+
+.preloader_wallpaper label + h3{
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+.preloader_wallpaper label + h3 span{
+    display: block;
+}
+
+.preloader_wallpaper label + h3 span::before{
+    content: "";
+}
+
+.preloader_wallpaper.success label + h3 span,
+.preloader_wallpaper.error label + h3 span{
+    display: none;
+}
+
+/*text result*/
+.preloader_wallpaper.success label + h3::after{
+    content: "Petición satisfactoria";
+}
+
+.preloader_wallpaper.error label + h3::after{
+    color: red;
+    content: "Ocurrio un error al procesar la petición";
+}
+
+#msg_error.show{
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: red;
+    margin-top: 0;
+}
+
+.preloader_wallpaper button{
+    padding: .8rem;
+    border-radius: .3rem;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    color: var(--second-color);
+    font-weight: 700;
+    display: none;
+}
+
+.preloader_wallpaper.success button{
+    background-color: var(--firts-color);
+}
+
+.preloader_wallpaper.success button:hover,
+.preloader_wallpaper.error button:hover{
+    opacity: .7;
+}
+
+.preloader_wallpaper.error button{
+    background-color: red;
+}
+
+.preloader_wallpaper.stop_animation_preloader label .check-icon{
+    display: block;
+}
+
+.preloader_wallpaper.stop_animation_preloader button{
+    display: block;
+}
+
+.preloader_wallpaper.stop_animation_preloader label{
+    animation: none;
+    border-color: var(--firts-color);
+    opacity: .8;
+    transition: border 0.5s ease-out;
+}
+
+.preloader_wallpaper.error.stop_animation_preloader label{
+    border-color: red;
+}
+
+.text_popup{
+    font-size: 1rem;
+    font-family: var(--font-header);
+    font-weight: 700;
+    color: var(--firts-color);
+    text-align: center;
+}
+
+/*class init preloader*/
+#init_preloader.show{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--leaflet-color-btn);
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#init_preloader.show .preloader_wallpaper{
+    background-color: inherit;
+}
+
+#init_preloader.show .preloader_wallpaper h3{
+    color: var(--firts-color);
+    font-size: 1.2rem;
+    font-family: var(--font-body);
+}
+
+/*end class init preloader*/
+
+/*END CLASS PRELOADER WALLPAPER*/
+
 .ts-dropdown,
 .ts-control,
 .ts-control input{
     font-family: var(--font-body);
+}
+
+@media (pointer: coarse){
+    main,
+    #information{
+        height: 100%;
+        height: calc(var(--app-height, 1vh) * 100);
+    }
 }
 
 @media all and (max-width: 900px){
@@ -475,6 +831,10 @@ header aside span{
 }
 
 @media all and (min-width: 900px){
+    body{
+        background-color: var(--second-color);
+    }
+
     header svg,
     footer svg{
         width: 1.8rem;

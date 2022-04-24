@@ -43,8 +43,17 @@ function event_icon_footer(e){
         let info_target = get_info_link_footer(target);
         let [name_svg, name_id_main] = info_target.info;
         let link_footer = info_target.link_footer;
-        selectElement('footer ul li a.active').classList.remove('active');
-        selectElement('symbol.active').classList.remove('active');
+        let element_active = selectElement('footer ul li a.active');
+
+        if(element_active != null){
+            element_active.classList.remove('active');
+        }
+
+        let symbol_active = selectElement('symbol.active');
+
+        if(symbol_active != null){
+            symbol_active.classList.remove('active');
+        }
 
         link_footer.classList.add('active');
         selectElement(name_svg).classList.add('active');
@@ -55,7 +64,13 @@ function event_icon_footer(e){
 
         }else if(name_id_main == '#delete'){
 
-            console.log('crear popup delete');
+            selectElement(name_id_main).style['animation-name'] = 'fade_in_data';
+            selectElement(name_id_main).classList.remove('hide');
+            selectElement(name_id_main).classList.add('show');
+
+            setTimeout(() => {
+                selectElement(name_id_main).style['animation-name'] = '';
+            }, wait_time_sidebar);
 
         }else{
 
@@ -87,6 +102,12 @@ function status_init_form(){
             link_form_location.classList.add('active');
             selectElement('#form_svg').classList.add('active');
 
+            let list_info = selectElement('#list_info');
+
+            if(list_info.classList.contains('hide')){
+                list_info.classList.remove('hide');
+            }
+
             selectElement('footer ul').addEventListener(
                 'click',
                 event_icon_footer,
@@ -114,6 +135,13 @@ function status_init_form(){
         if(sidebar_info.classList.contains('show')){
             selectElement('#information').classList.remove('show');
             selectElement('#information').classList.add('hide');
+        }
+
+        if(window.matchMedia(text_media_query).matches == false){
+            let sidebar_map = selectElement('#map');
+            if(sidebar_map.classList.contains('hide')){
+                sidebar_map.classList.remove('hide');
+            }
         }
     }
 }
@@ -219,8 +247,12 @@ function combobox_municipality(select_parish, array_element_tom_select){
         let FormDataInput = new FormData();
         FormDataInput.append('cod_mun', cod_mun);
 
-        select_parish.clearOptions();
-        select_parish.clear();
+        select_parish.destroy();
+        selectElement('#parish').innerHTML = '';
+
+        select_parish = new TomSelect('#parish', {
+            placeholder: 'Seleccione...'
+        });
 
         array_element_tom_select.forEach((element) => {
             element.clearOptions();
@@ -314,6 +346,9 @@ function initMap(){
     const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 7,
         center: initial_coordinates,
+        gestureHandling: "cooperative",
+        fullscreenControl: false,
+        streetViewControl: false,
     });
 
     return map;
@@ -362,24 +397,47 @@ function add_content_table(data_establishment){
     });
 }
 
-function show_items_map_mobile(){
-    if(window.matchMedia(text_media_query).matches){
-        selectElement('footer ul li a.active').classList.remove('active');
-        selectElement('symbol.active').classList.remove('active');
-        let element_main_show = selectElement('main section.show');
+function show_items_map(){
+
+    let link_active = selectElement('footer ul li a.active');
+
+    if(link_active != null){
+        link_active.classList.remove('active');
+    }
+
+    let symbol_active = selectElement('symbol.active');
+
+    if(symbol_active != null){
+        symbol_active.classList.remove('active');
+    }
+
+    let element_main_show = selectElement('main section.show');
+
+    if(element_main_show != null){
         element_main_show.classList.remove('show');
         element_main_show.classList.add('hide');
+    }
+
+    if(window.matchMedia(text_media_query).matches){
 
         selectElement('#list_map a').classList.add('active');
         selectElement('#map_location').classList.add('active');
         selectElement('#map').classList.remove('hide');
         selectElement('#map').classList.add('show');
+
+    }else{
+
+        selectElement('#list_table_summary a').classList.add('active');
+        selectElement('#table_svg').classList.add('active');
+        selectElement('#summary_table').classList.remove('hide');
+        selectElement('#summary_table').classList.add('show');
+
     }
 }
 
 function add_data_map(data, map){
 
-    show_items_map_mobile();
+    show_items_map();
 
     let markers = [];
 
@@ -466,11 +524,229 @@ function add_data_map(data, map){
     
         map.fitBounds(bounds);
 
+        function reinit_map(){
+            markers.forEach(element => {
+                element.setMap(null);
+            });
+
+            map.setCenter(initial_coordinates);
+            map.setZoom(7);
+
+            selectElement('#preloader_btn_confirm').removeEventListener('click', reinit_map, false);
+
+        }
+
+        selectElement('#preloader_btn_confirm').addEventListener('click', reinit_map, false);
+
 
     }, wait_time_sidebar);
 }
 
-function load(){
+function add_event_list_web(){
+    if(window.matchMedia(text_media_query).matches == false){
+        selectElement('footer ul').addEventListener(
+            'click',
+            event_icon_footer,
+            false
+        );
+    }
+}
+
+function event_btn_cancel_preloader(e){
+
+    e.preventDefault();
+    selectElement('#delete').classList.remove('show');
+    selectElement('#delete').classList.add('hide');
+    selectElement('footer ul li a.active').classList.remove('active');
+    selectElement('#eraser').classList.remove('active');
+    selectElement('main').style['animation-name'] = 'fade_in_data';
+
+    //START EVENT ADD CLASS ACTIVE IN ICON SVG MAIN ACTIVE
+    let name_section_active = selectElement('main section.show').id;
+    let link_section_active = selectElement(`footer ul li a[href="#${name_section_active}"]`);
+    let name_icon_svg_section_active = link_section_active.firstElementChild.firstElementChild.getAttribute('xlink:href');
+    
+    link_section_active.classList.add('active');
+    selectElement(name_icon_svg_section_active).classList.add('active');
+    //END EVENT ADD CLASS ACTIVE IN ICON SVG MAIN ACTIVE
+
+    setTimeout(() => {
+        selectElement('main').style['animation-name'] = '';
+    }, wait_time_sidebar);
+
+}
+
+function stop_animation_loader(class_response){
+    var preloader = selectElement('#response_preloader .preloader_wallpaper');
+    preloader.classList.add(class_response);
+    preloader.classList.add('stop_animation_preloader');
+}
+
+function event_btn_confirm_preloader(e){
+    e.preventDefault();
+    let view_show_current = selectElement('main section.show');
+    view_show_current.classList.remove('show');
+    view_show_current.classList.add('hide');
+
+    selectElement('#form_location').classList.remove('hide');
+    selectElement('#form_location').classList.add('show');
+
+    selectElement('footer ul li a.active').classList.remove('active');
+    selectElement('symbol.active').classList.remove('active');
+
+    selectElement('#link_location').classList.add('init');
+
+    selectElement('#delete').classList.remove('show');
+    selectElement('#delete').classList.add('hide');
+
+    selectElement('main').style['animation-name'] = 'fade_in_data';
+
+    document.querySelectorAll('li.list_optional').forEach(element => {
+        element.classList.add('hide');
+    })
+
+    selectElement('#summary_table table tbody').innerHTML = '';
+
+    status_init_form();
+
+    setTimeout(() => {
+        selectElement('main').style['animation-name'] = '';
+    }, wait_time_sidebar);
+
+}
+
+function restart_style_preloader(){
+    var preloader = selectElement('#response_preloader .preloader_wallpaper');
+    preloader.classList.remove('error');
+    preloader.classList.remove('success');
+    preloader.classList.remove('stop_animation_preloader');
+
+    selectElement('#response_preloader').classList.remove('show');
+    selectElement('#response_preloader').classList.add('hide');
+
+}
+
+function restart_style_preloader_click_button(e){
+    e.preventDefault;
+    let btn = e.target;
+    btn.disabled = true;
+
+    restart_style_preloader();
+
+    let msg_error = selectElement('#msg_error');
+
+    msg_error.innerHTML = '';
+    msg_error.classList.remove('show');
+    msg_error.classList.add('hide');
+
+    selectElement('main').style['animation-name'] = 'fade_in_data';
+
+    setTimeout(() => {
+        btn.removeAttribute('disabled');
+        selectElement('main').style['animation-name'] = '';
+    }, wait_time_sidebar);
+
+}
+
+function reinit_form(array_tom_select){
+    selectElement('#query_location input[type="submit"]').removeAttribute('disabled');
+    selectElement('#btn_geolocation').removeAttribute('disabled');
+
+    array_tom_select.forEach(element => {
+        element.disable();
+    })
+}
+
+function init_location(e){
+    let btn = e.target;
+    btn.setAttribute('disabled', true);
+
+    selectElement('#response_preloader').classList.remove('hide');
+    selectElement('#response_preloader').classList.add('show');
+    selectElement('#response_preloader').style['animation-name'] = 'fade_in_data';
+
+    let msg_error = selectElement('#msg_error')
+
+    if(navigator.geolocation){
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                let lat = position.coords.latitude;
+                let lng = position.coords.longitude;
+                let accuracy  = position.coords.accuracy;
+
+                console.log(accuracy);
+
+                if(accuracy > 100){
+
+                    stop_animation_loader('error');
+                    btn.removeAttribute('disabled');
+
+                    msg_error.innerHTML = 'La precisión en la ubicación del dispositivo excede la tolerancia';
+                    msg_error.classList.remove('hide');
+                    msg_error.classList.add('show');
+                    
+
+                }else{
+
+                    let FormData_input = new FormData();
+                    FormData_input.append('lat', lat);
+                    FormData_input.append('lng', lng);
+
+                    get_post_data_json(
+                        'assets/php/create_list_establishment_location.php',
+                        FormData_input
+                    )
+                    .then(response => {
+                        if(response.response){
+                            stop_animation_loader('success');
+            
+                            add_style_load_data_response();
+                            add_content_table(response.data.establishment);
+                            add_data_map(response.data, map);
+                            add_event_list_web();
+
+                            selectElement('#query_location input[type="submit"]').setAttribute('disabled', true);
+                            
+                        }else{
+                            stop_animation_loader('error');
+                            msg_error.innerHTML = response.message;
+                            msg_error.classList.remove('hide');
+                            msg_error.classList.add('show');
+                            btn.removeAttribute('disabled');
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        stop_animation_loader('error');
+                        btn.removeAttribute('disabled');
+
+                    })
+                    
+                }
+
+            },
+            (error) => {
+                console.log(error);
+                stop_animation_loader('error');
+                msg_error.innerHTML = 'Acceso denegado a la ubicación del dispositivo';
+                msg_error.classList.remove('hide');
+                msg_error.classList.add('show');
+                btn.removeAttribute('disabled');
+            }
+        )
+
+    }else{
+        stop_animation_loader('error');
+        msg_error.innerHTML = 'El navegador web no es compatible con la función de geolocalización';
+        msg_error.classList.remove('hide');
+        msg_error.classList.add('show');
+        btn.removeAttribute('disabled');
+    }
+        
+}
+
+function load(data_municipality){
 
     status_init_form();
     window.addEventListener('resize', status_init_form, false);
@@ -483,6 +759,12 @@ function load(){
         e.preventDefault();
         open_sidebar_info();
     }, false);
+
+    selectElement('#preloader_btn_cancel').addEventListener('click', event_btn_cancel_preloader, false);
+
+    selectElement('#preloader_btn_confirm').addEventListener('click', event_btn_confirm_preloader, false);
+
+    selectElement('#restart_preloader').addEventListener('click', restart_style_preloader_click_button, false);
 
     selectElement('#form_location nav ul').addEventListener('click', (e) => {
         e.preventDefault();
@@ -517,15 +799,15 @@ function load(){
         placeholder: 'seleccione...'
     });
 
-    get_data_json('assets/php/create_list_municipality.php')
-    .then(response =>{
-        if(response.response){
-            municipality.addOptions(response.data);
-        }
-    })
-    .catch(error => {
-        console.log(error);
-    });
+    municipality.addOptions(data_municipality);
+
+    selectElement('#preloader_btn_confirm').addEventListener(
+        'click', 
+        (e) => {
+            reinit_form([parish, community, distance])
+        }, 
+        false
+    );
 
     combobox_municipality(parish, [community, distance]);
     combobox_parish(community, distance);
@@ -553,7 +835,7 @@ function load(){
                     lng: parseFloat(btn.getAttribute('data-lng'))
                 }
 
-                show_items_map_mobile();
+                show_items_map();
 
                 
                 setTimeout(() => {
@@ -561,9 +843,12 @@ function load(){
                     map.setZoom(18);
                 }, wait_time_sidebar);
                 
+                
             }
         }
     }, false);
+
+    selectElement('#btn_geolocation').addEventListener('click', init_location, false);
 
     selectElement('#query_location').addEventListener('submit', (e) => {
         e.preventDefault();
@@ -571,25 +856,100 @@ function load(){
         let submit = e.target.querySelector('input[type="submit"]');
         submit.setAttribute('disabled', true);
 
+        selectElement('#response_preloader').classList.remove('hide');
+        selectElement('#response_preloader').classList.add('show');
+
+        selectElement('#response_preloader').style['animation-name'] = 'fade_in_data';
+
+        setTimeout(() => {
+            selectElement('#response_preloader').style['animation-name'] = '';
+        }, wait_time_sidebar);
+
+        let msg_error = selectElement('#msg_error');
+
         get_post_data_json(
             'assets/php/create_list_establishment_health.php',
             form
         )
         .then(response => {
+            
             if(response.response){
+                stop_animation_loader('success');
+
                 add_style_load_data_response();
                 add_content_table(response.data.establishment);
                 add_data_map(response.data, map);
-                console.log(response.data);
+                add_event_list_web();
+
+                selectElement('#btn_geolocation').setAttribute('disabled', true);
+                
+            }else{
+
+                stop_animation_loader('error');
+                msg_error.innerHTML = response.message;
+                msg_error.classList.remove('hide');
+                msg_error.classList.add('show');
+
+                reinit_form([parish, community, distance]);
+
+                submit.removeAttribute('disabled');
+
             }
+
         })
         .catch(error => {
+            stop_animation_loader('error');
             console.log(error);
+            reinit_form([parish, community, distance]);
+            submit.removeAttribute('disabled');
         })
 
     }, false);
 
-
 }
 
-window.addEventListener('load', load, false);
+const appHeight = () => {
+    const doc = document.documentElement;
+    let vh = window.innerHeight * 0.01;
+    doc.style.setProperty('--app-height', `${vh}px`)
+}
+
+window.addEventListener('load', (e) => {
+
+    if(window.matchMedia('(pointer: coarse)').matches){
+        appHeight();
+        window.addEventListener('resize', appHeight, false);
+    }
+
+    var preloader = selectElement('#init_preloader .preloader_wallpaper');
+
+    get_data_json('assets/php/create_list_municipality.php')
+    .then(response =>{
+        if(response.response){
+            preloader.classList.add('success');
+            preloader.classList.add('stop_animation_preloader');
+
+            setTimeout(() => {
+                selectElement('#init_preloader').classList.remove('show');
+                selectElement('#init_preloader').classList.add('hide');
+
+                selectElement('main').classList.remove('hide');
+                selectElement('main').style['animation-name'] = 'fade_in_data';
+
+                load(response.data);
+                
+            }, wait_time_close_sidebar);
+
+            setTimeout(() => {
+                selectElement('main').style['animation-name'] = '';
+            }, wait_time_close_sidebar);
+
+        }else{
+            preloader.classList.add('error');
+            preloader.classList.add('stop_animation_preloader');
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}, false);

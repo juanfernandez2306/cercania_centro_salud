@@ -6,18 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cercania Centros de Salud</title>
 
-    <!--
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet"> 
+
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.1/dist/css/tom-select.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.1/dist/js/tom-select.complete.min.js"></script>
-    -->
-
+    
     <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAM9cbWcbs4jPW9OFLMmFbiBM0pAX8Gbh8&callback=initMap&v=weekly"
     async
     ></script>
-
-    <link rel="stylesheet" href="../complementos/tom-select/tom-select.css">
-    <script src="../complementos/tom-select/tom-select.complete.min.js"></script>
 
     <link rel="stylesheet" href="assets/style.css">
     <script src="assets/main.js"></script>
@@ -133,6 +132,14 @@
 	        V198.312c11.939,8.077,26.345,12.797,41.813,12.797c15.467,0,29.872-4.721,41.813-12.797V356.496z"/>
         </symbol>
     </svg>
+    <section id="init_preloader" class="show">
+        <div class="preloader_wallpaper">
+            <label>
+                <div class="check-icon"></div>
+            </label>
+            <h3><span>Espere un momento</span></h3>
+        </div>
+    </section>
     <section id="wallpaper" class="hide"></section>
     <section id="screen"></section>
     <section id="information" class="hide">
@@ -153,7 +160,7 @@
                 <li>
                     Haga clic en el cuadro de <b>Búsqueda</b> y 
                     rellene los campos de municipio, parroquia y comunidad. Seleccione un rango de distancia 
-                    hasta un máximo de 2 km en zonas rurales y un 1 km en zonas urbanas.
+                    hasta un máximo de 4 km en zonas rurales y un 2 km en zonas urbanas.
                 </li>
                 <li>
                     Usar su ubicación actual haciendo click en <b>Geolocalización</b>. 
@@ -162,6 +169,7 @@
             </ul>
             <p>
                 Si se encuentra algún centro de salud en ese rango de distancia, aparecerá una lista en el cuadro de resultado.
+                El máximo de registro visible es de 10 establecimientos. Proporcionando prioridad a los más cercanos.
             </p>
             <p>
                 En la lista haga click sobre cada registro, en el mapa se resaltaran los elementos encontrados.
@@ -202,7 +210,29 @@
             <button class="close_btn_info">Cerrar</button>
         </section>
     </section>
-    <main>
+    <section id="delete" class="hide">
+        <section class="preloader_delete">
+            <label>
+                <div class="gg-trash"></div>
+            </label>
+            <h3>¿Desea eliminar la consulta actual?</h3>
+            <section>
+                <button id="preloader_btn_confirm" class="confirm">Confirmar</button>
+                <button id="preloader_btn_cancel" class="cancel">Cancelar</button>
+            </section>
+        </section>
+    </section>
+    <aside id="response_preloader" class="hide">
+        <div class="preloader_wallpaper">
+            <label>
+                <div class="check-icon"></div>
+            </label>
+            <h3><span>Espere un momento</span></h3>
+            <h2 id="msg_error" class="hide"></h2>
+            <button id="restart_preloader">Continuar</button>
+        </div>
+    </aside>
+    <main class="hide">
         <header>
             <aside>
                 <svg><use xlink:href="#map_header"/></svg>
@@ -250,7 +280,7 @@
                 
             <aside id="geolocation" class="hide">
                 <h3>Localización del dispositivo  en una radio de 1 km de distancia.</h3>
-                <button>Iniciar</button>
+                <button id="btn_geolocation">Iniciar</button>
             </aside>
             
         </section>
@@ -278,7 +308,7 @@
                         <svg><use xlink:href="#info"/></svg>
                     </a>
                 </li>
-                <li class="list_optional hide">
+                <li id="list_table_summary" class="list_optional hide">
                     <a href="#summary_table">
                         <svg><use xlink:href="#table_svg"/></svg>
                     </a> 

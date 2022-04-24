@@ -58,20 +58,18 @@
         'distance' => isset($_POST['distance']) ? validation_limit_distance($_POST['distance']) : null
     ), 'returns_data_not_null');
 
+    $message = null;
+
     if(count($filter_data) == 2){
         $response = true;
         $filter_data;
         $data = array();
 
         $id_comunidad = $filter_data['id_comunidad'];
-        /**
-         * distance submit in km
-         */
+        
         $distance = $filter_data['distance'];
 
-        /**
-         * average radius earth in km
-         */
+        
         $radius_earth = 6371;
 
         $tita = ( ($distance / 1000) / $radius_earth) * (180 / pi());
@@ -108,21 +106,38 @@
             
             $result_establishment = create_list_establishment($sentence);
 
-            $data['establishment'] = $result_establishment;
+            if(count($result_establishment) > 0){
+
+                $data['establishment'] = $result_establishment;
+
+            }else{
+
+                $response = false;
+                $data = null;
+                $message = 'La consulta no genero ningún registro disponible';
+
+            }
 
             
 
         }else{
+
             $response = false;
+            $data = null;
+            $message = 'La consulta de la comunidad no genero ninguna respuesta valida';
+
         }
 
     }else{
         $response = false;
         $data = null;
+        $message = 'Parámetros inválidos ó nulos';
     }
 
     echo json_encode([
         'response' => $response,
-        'data' => $data
+        'data' => $data,
+        'message' => $message
     ], JSON_NUMERIC_CHECK);
+
 ?>

@@ -2,7 +2,11 @@ SELECT
 ST_X(geom) AS lng,
 ST_Y(geom) AS lat,
 UPPER(nombre) AS name,
-ST_Distance_Sphere(geom, ST_GeomFromText(%s, 4326)) AS distance
+ROUND(
+    ST_Distance_Sphere(
+        geom, 
+        ST_GeomFromText(%s, 4326)
+    ), 2) AS distance
 FROM establecimientos_salud
 WHERE
 ST_Contains(

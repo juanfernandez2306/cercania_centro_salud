@@ -90,18 +90,11 @@
                 'distance' => $distance
             );
 
-            $linestring = sprintf('LINESTRING(%s %s, %s %s)',
-                $lng - ($tita / 2),
-                $lat - ($tita / 2),
-                $lng + ($tita / 2),
-                $lat + ($tita / 2)
-            );
-
             $pointstring = $info_community['data']['text_geom'];
             $sentence = file_get_contents('sql/query_health_establishment_list.sql');
 
             $sentence = sprintf($sentence, 
-            "'" . $pointstring . "'", "'" . $pointstring . "'", "'". $linestring . "'");
+            "'" . $pointstring . "'", "'" . $pointstring . "'", $tita);
 
             
             $result_establishment = create_list_establishment($sentence);

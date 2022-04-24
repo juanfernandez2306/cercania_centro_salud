@@ -55,13 +55,6 @@
             'distance' => 2000
         );
 
-        $linestring = sprintf('LINESTRING(%s %s, %s %s)',
-            $lng - ($tita / 2),
-            $lat - ($tita / 2),
-            $lng + ($tita / 2),
-            $lat + ($tita / 2)
-        );
-
         $pointstring = sprintf('POINT(%s %s)', $lng, $lat);
 
         $sentence = file_get_contents('sql/query_health_establishment_list.sql');
@@ -69,7 +62,7 @@
         $sentence = sprintf($sentence, 
             "'" . $pointstring . "'", 
             "'" . $pointstring . "'", 
-            "'". $linestring . "'"
+            $tita
         );
 
         $result_establishment = create_list_establishment($sentence);

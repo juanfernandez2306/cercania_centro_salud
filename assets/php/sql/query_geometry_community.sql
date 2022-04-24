@@ -1,7 +1,7 @@
 SELECT
-AsText(com.geom) AS text_geom,
-X(com.geom) AS lng,
-Y(com.geom) AS lat,
+ST_AsText(com.geom) AS text_geom,
+ST_X(com.geom) AS lng,
+ST_Y(com.geom) AS lat,
 CASE 
     WHEN com.sector IS NULL THEN
         CASE 

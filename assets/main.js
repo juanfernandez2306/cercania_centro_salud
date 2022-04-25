@@ -53,9 +53,11 @@ function event_icon_footer(e){
 
         if(symbol_active != null){
             symbol_active.classList.remove('active');
+            symbol_active.classList.add('init');
         }
 
         link_footer.classList.add('active');
+        selectElement(name_svg).classList.remove('init');
         selectElement(name_svg).classList.add('active');
 
         if(name_id_main == '#information'){
@@ -85,12 +87,6 @@ function event_icon_footer(e){
     }
 }
 
-function remove_class_active(element){
-    if(element != null){
-        element.classList.remove('active');
-    }
-}
-
 function status_init_form(){
 
     let link_form_location = selectElement('#link_location');
@@ -100,6 +96,7 @@ function status_init_form(){
         if(window.matchMedia(text_media_query).matches){
             
             link_form_location.classList.add('active');
+            selectElement('#form_svg').classList.remove('init');
             selectElement('#form_svg').classList.add('active');
 
             let list_info = selectElement('#list_info');
@@ -118,8 +115,15 @@ function status_init_form(){
 
             let link_active = selectElement('footer ul li a.active');
             let symbol = selectElement('symbol.active');
-            remove_class_active(link_active);
-            remove_class_active(symbol);
+
+            if(link_active != null){
+                link_active.classList.remove('active');
+            }
+
+            if(symbol != null){
+                symbol.classList.remove('active');
+                symbol.classList.add('init');
+            }
 
             selectElement('footer ul').removeEventListener(
                 'click',
@@ -172,12 +176,21 @@ function open_sidebar_info(){
 function efect_close_btn_info_mobile(){
     if(window.matchMedia(text_media_query).matches){
         let link_active = selectElement('footer ul li a.active');
-        remove_class_active(link_active);
-        
+
+        if(link_active != null){
+            link_active.classList.remove('active');
+        }
+
         let symbol_active = selectElement('symbol.active');
-        remove_class_active(symbol_active);
+
+        if(symbol_active != null){
+            symbol_active.classList.remove('active');
+            symbol_active.classList.add('init');
+        }
 
         selectElement('#link_location').classList.add('active');
+
+        selectElement('#form_svg').classList.remove('init');
         selectElement('#form_svg').classList.add('active');
     }
 }
@@ -409,6 +422,7 @@ function show_items_map(){
 
     if(symbol_active != null){
         symbol_active.classList.remove('active');
+        symbol_active.classList.add('init');
     }
 
     let element_main_show = selectElement('main section.show');
@@ -421,6 +435,7 @@ function show_items_map(){
     if(window.matchMedia(text_media_query).matches){
 
         selectElement('#list_map a').classList.add('active');
+        selectElement('#map_location').classList.remove('init');
         selectElement('#map_location').classList.add('active');
         selectElement('#map').classList.remove('hide');
         selectElement('#map').classList.add('show');
@@ -428,6 +443,7 @@ function show_items_map(){
     }else{
 
         selectElement('#list_table_summary a').classList.add('active');
+        selectElement('#table_svg').classList.remove('init');
         selectElement('#table_svg').classList.add('active');
         selectElement('#summary_table').classList.remove('hide');
         selectElement('#summary_table').classList.add('show');
@@ -559,6 +575,7 @@ function event_btn_cancel_preloader(e){
     selectElement('#delete').classList.add('hide');
     selectElement('footer ul li a.active').classList.remove('active');
     selectElement('#eraser').classList.remove('active');
+    selectElement('#eraser').classList.add('init');
     selectElement('main').style['animation-name'] = 'fade_in_data';
 
     //START EVENT ADD CLASS ACTIVE IN ICON SVG MAIN ACTIVE
@@ -592,7 +609,12 @@ function event_btn_confirm_preloader(e){
     selectElement('#form_location').classList.add('show');
 
     selectElement('footer ul li a.active').classList.remove('active');
-    selectElement('symbol.active').classList.remove('active');
+    let symbol_active = selectElement('symbol.active');
+
+    if(symbol_active != null){
+        symbol_active.classList.remove('active');
+        symbol_active.classList.add('init');
+    }
 
     selectElement('#link_location').classList.add('init');
 
@@ -673,9 +695,7 @@ function init_location(e){
             (position) => {
                 let lat = position.coords.latitude;
                 let lng = position.coords.longitude;
-                let accuracy  = position.coords.accuracy;
-
-                console.log(accuracy);
+                let accuracy  = parseInt(position.coords.accuracy);
 
                 if(accuracy > 100){
 

@@ -1,7 +1,11 @@
 SELECT
 ST_AsText(com.geom) AS text_geom,
-ST_X(com.geom) AS lng,
-ST_Y(com.geom) AS lat,
+ROUND(
+	ST_X(com.geom), 
+5) AS lng,
+ROUND(
+	ST_Y(com.geom),
+5) AS lat,
 CASE 
     WHEN com.sector IS NULL THEN
         CASE 

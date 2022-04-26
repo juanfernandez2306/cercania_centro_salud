@@ -63,19 +63,11 @@ main{
     animation-duration: .7s;
 }
 
-symbol.init path,
-symbol.init g path,
-symbol.init g g path,
-symbol.init g rect,
-symbol.init g polygon{
+use.init{
     fill: var(--second-color);
 }
 
-symbol.active path,
-symbol.active g path,
-symbol.active g g path,
-symbol.active g rect,
-symbol.active g polygon{
+use.active{
     fill: var(--firts-color);
 }
 

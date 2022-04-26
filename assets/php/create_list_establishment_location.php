@@ -26,8 +26,8 @@
     }
 
     $filter_data = array_filter(array(
-        'lat' => isset($_POST['lat']) ? validation_input_integer($_POST['lat']) : null,
-        'lng' => isset($_POST['lng']) ? validation_input_integer($_POST['lng']) : null
+        'lat' => isset($_POST['lat']) ? validation_input_float($_POST['lat']) : null,
+        'lng' => isset($_POST['lng']) ? validation_input_float($_POST['lng']) : null
     ), 'returns_data_not_null');
 
     $message = null;
@@ -43,8 +43,8 @@
 
         $tita = ( (2000 / 1000) / $radius_earth) * (180 / pi());
 
-        $lat = $filter_data['lat'];
-        $lng = $filter_data['lng'];
+        $lat = round($filter_data['lat'], 5);
+        $lng = round($filter_data['lng'], 5);
 
         $data['community'] = array(
             'name' => 'MI UBICACION',
@@ -68,7 +68,9 @@
         $result_establishment = create_list_establishment($sentence);
 
         if(count($result_establishment) > 0){
+
             $data['establishment'] = $result_establishment;
+            
         }else{
             $response = false;
             $data = null;

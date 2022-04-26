@@ -7,6 +7,18 @@
         }
     }
 
+    function validation_input_float($input){
+		if (is_numeric($input)){
+			
+			return (float)$input;
+			
+		}else{
+			
+			return null;
+			
+		}
+	}
+
     function validation_limit_distance($input){
 
         $number = validation_input_integer($input);

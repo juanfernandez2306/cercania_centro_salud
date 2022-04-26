@@ -18,19 +18,20 @@ function get_info_link_footer(target){
     let link_footer = target;
 
     if(name_target == 'svg'){
-        link_footer = target.parentElement;
-    }else if(name_target == 'use'){
-        link_footer = target.parentElement.parentElement;
-    }
 
-    let use_footer = link_footer.firstElementChild.firstElementChild;
-    let name_svg = use_footer.getAttribute('xlink:href');
+        link_footer = target.parentElement;
+
+    }else if(name_target == 'use'){
+
+        link_footer = target.parentElement.parentElement;
+
+    }
 
     let array_href_link = link_footer.href.split('/');
     let name_id_main = array_href_link.at(-1);
 
     return {
-        info: [name_svg, name_id_main],
+        name_id_main: name_id_main,
         link_footer: link_footer
     }
 
@@ -41,7 +42,7 @@ function event_icon_footer(e){
     let target = e.target;
     if(target){
         let info_target = get_info_link_footer(target);
-        let [name_svg, name_id_main] = info_target.info;
+        let name_id_main = info_target.name_id_main;
         let link_footer = info_target.link_footer;
         let element_active = selectElement('footer ul li a.active');
 
@@ -49,16 +50,18 @@ function event_icon_footer(e){
             element_active.classList.remove('active');
         }
 
-        let symbol_active = selectElement('symbol.active');
+        let use_active = element_active.querySelector('svg use');
 
-        if(symbol_active != null){
-            symbol_active.classList.remove('active');
-            symbol_active.classList.add('init');
+        if(use_active != null){
+            use_active.classList.remove('active');
+            use_active.classList.add('init');
         }
 
         link_footer.classList.add('active');
-        selectElement(name_svg).classList.remove('init');
-        selectElement(name_svg).classList.add('active');
+
+        let link_footer_use = link_footer.querySelector('svg use');
+        link_footer_use.classList.remove('init');
+        link_footer_use.classList.add('active');
 
         if(name_id_main == '#information'){
 
@@ -96,13 +99,25 @@ function status_init_form(){
         if(window.matchMedia(text_media_query).matches){
             
             link_form_location.classList.add('active');
-            selectElement('#form_svg').classList.remove('init');
-            selectElement('#form_svg').classList.add('active');
+
+            let link_form_location_use = link_form_location.querySelector('svg use');
+            link_form_location_use.classList.remove('init');
+            link_form_location_use.classList.add('active');
 
             let list_info = selectElement('#list_info');
 
             if(list_info.classList.contains('hide')){
                 list_info.classList.remove('hide');
+
+                let use_info = selectElement('#information svg use');
+
+                if(use_info.classList.contains('active')){
+                    use_info.classList.remove('active');
+                }
+
+                if(use_info.classList.contains('init') == false){
+                    use_info.classList.add('init');
+                }
             }
 
             selectElement('footer ul').addEventListener(
@@ -114,15 +129,17 @@ function status_init_form(){
         }else{
 
             let link_active = selectElement('footer ul li a.active');
-            let symbol = selectElement('symbol.active');
 
             if(link_active != null){
                 link_active.classList.remove('active');
-            }
 
-            if(symbol != null){
-                symbol.classList.remove('active');
-                symbol.classList.add('init');
+                let use_active = link_active.querySelector('svg use');
+
+                if(use_active != null){
+                    use_active.classList.remove('active');
+                    use_active.classList.add('init');
+                }
+
             }
 
             selectElement('footer ul').removeEventListener(
@@ -179,19 +196,24 @@ function efect_close_btn_info_mobile(){
 
         if(link_active != null){
             link_active.classList.remove('active');
+
+            let use_active = link_active.querySelector('svg use');
+
+            if(use_active != null){
+                use_active.classList.remove('active');
+                use_active.classList.add('init');
+            }
+
         }
 
-        let symbol_active = selectElement('symbol.active');
+        let link_form_location =  selectElement('#link_location');
 
-        if(symbol_active != null){
-            symbol_active.classList.remove('active');
-            symbol_active.classList.add('init');
-        }
+        link_form_location.classList.add('active');
 
-        selectElement('#link_location').classList.add('active');
+        let link_form_location_use = link_form_location.querySelector('svg use');
 
-        selectElement('#form_svg').classList.remove('init');
-        selectElement('#form_svg').classList.add('active');
+        link_form_location_use.classList.remove('init');
+        link_form_location_use.classList.add('active');
     }
 }
 
@@ -399,7 +421,7 @@ function add_content_table(data_establishment){
         td = document.createElement('td');
         let button = document.createElement('button');
         
-        button.innerHTML = `<svg><use xlink:href="#arrow_right"/></svg>`;
+        button.innerHTML = `<svg><use class="init" xlink:href="#arrow_right"/></svg>`;
         button.setAttribute('data-lat', element.coordinates.lat);
         button.setAttribute('data-lng', element.coordinates.lng);
 
@@ -416,13 +438,13 @@ function show_items_map(){
 
     if(link_active != null){
         link_active.classList.remove('active');
-    }
 
-    let symbol_active = selectElement('symbol.active');
+        let use_active = link_active.querySelector('svg use');
 
-    if(symbol_active != null){
-        symbol_active.classList.remove('active');
-        symbol_active.classList.add('init');
+        if(use_active != null){
+            use_active.classList.remove('active');
+            use_active.classList.add('init');
+        }
     }
 
     let element_main_show = selectElement('main section.show');
@@ -435,16 +457,16 @@ function show_items_map(){
     if(window.matchMedia(text_media_query).matches){
 
         selectElement('#list_map a').classList.add('active');
-        selectElement('#map_location').classList.remove('init');
-        selectElement('#map_location').classList.add('active');
+        selectElement('#list_map a svg use').classList.remove('init');
+        selectElement('#list_map a svg use').classList.add('active');
         selectElement('#map').classList.remove('hide');
         selectElement('#map').classList.add('show');
 
     }else{
 
         selectElement('#list_table_summary a').classList.add('active');
-        selectElement('#table_svg').classList.remove('init');
-        selectElement('#table_svg').classList.add('active');
+        selectElement('#list_table_summary a svg use').classList.remove('init');
+        selectElement('#list_table_summary a svg use').classList.add('active');
         selectElement('#summary_table').classList.remove('hide');
         selectElement('#summary_table').classList.add('show');
 
@@ -573,18 +595,35 @@ function event_btn_cancel_preloader(e){
     e.preventDefault();
     selectElement('#delete').classList.remove('show');
     selectElement('#delete').classList.add('hide');
-    selectElement('footer ul li a.active').classList.remove('active');
-    selectElement('#eraser').classList.remove('active');
-    selectElement('#eraser').classList.add('init');
+
+    let link_active = selectElement('footer ul li a.active');
+
+    if(link_active != null){
+        link_active.classList.remove('active');
+
+        let use_active = link_active.querySelector('svg use');
+
+        if(use_active != null){
+            use_active.classList.remove('active');
+            use_active.classList.add('init');
+        }
+    }
+
     selectElement('main').style['animation-name'] = 'fade_in_data';
 
     //START EVENT ADD CLASS ACTIVE IN ICON SVG MAIN ACTIVE
     let name_section_active = selectElement('main section.show').id;
     let link_section_active = selectElement(`footer ul li a[href="#${name_section_active}"]`);
-    let name_icon_svg_section_active = link_section_active.firstElementChild.firstElementChild.getAttribute('xlink:href');
-    
+
     link_section_active.classList.add('active');
-    selectElement(name_icon_svg_section_active).classList.add('active');
+
+    let use_section_active = link_section_active.querySelector('svg use');
+
+    if(use_section_active != null){
+        use_section_active.classList.remove('init');
+        use_section_active.classList.add('active');
+    }
+    
     //END EVENT ADD CLASS ACTIVE IN ICON SVG MAIN ACTIVE
 
     setTimeout(() => {
@@ -608,12 +647,17 @@ function event_btn_confirm_preloader(e){
     selectElement('#form_location').classList.remove('hide');
     selectElement('#form_location').classList.add('show');
 
-    selectElement('footer ul li a.active').classList.remove('active');
-    let symbol_active = selectElement('symbol.active');
+    let link_active =  selectElement('footer ul li a.active');
 
-    if(symbol_active != null){
-        symbol_active.classList.remove('active');
-        symbol_active.classList.add('init');
+    if(link_active != null){
+        link_active.classList.remove('active');
+
+        let use_active = link_active.querySelector('svg use');
+
+        if(use_active != null){
+            use_active.classList.remove('active');
+            use_active.classList.add('init');
+        }
     }
 
     selectElement('#link_location').classList.add('init');
@@ -679,8 +723,21 @@ function reinit_form(array_tom_select){
     })
 }
 
-function init_location(e){
-    let btn = e.target;
+function verifyCoordinateLimits(ObjectLatLng){
+    var lat= ObjectLatLng.lat,
+        lng = ObjectLatLng.lng;
+        
+    var limitLat = lat >= 8.36808 && lat <= 11.85079,
+        limitLng = lng >= -73.37939 && lng <= -70.66714;
+        
+    if(limitLat == true && limitLng == true){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function init_location(btn, map){
     btn.setAttribute('disabled', true);
 
     selectElement('#response_preloader').classList.remove('hide');
@@ -697,52 +754,67 @@ function init_location(e){
                 let lng = position.coords.longitude;
                 let accuracy  = parseInt(position.coords.accuracy);
 
+                let verifyCoordinate = verifyCoordinateLimits({lat: lat, lng: lng});
+
                 if(accuracy > 100){
 
                     stop_animation_loader('error');
                     btn.removeAttribute('disabled');
 
-                    msg_error.innerHTML = 'La precisión en la ubicación del dispositivo excede la tolerancia';
+                    msg_error.innerHTML = 'No se obtuvo buena precisión en la geolocalización';
                     msg_error.classList.remove('hide');
                     msg_error.classList.add('show');
                     
 
                 }else{
 
-                    let FormData_input = new FormData();
-                    FormData_input.append('lat', lat);
-                    FormData_input.append('lng', lng);
+                    if(verifyCoordinate == false){
 
-                    get_post_data_json(
-                        'assets/php/create_list_establishment_location.php',
-                        FormData_input
-                    )
-                    .then(response => {
-                        if(response.response){
-                            stop_animation_loader('success');
-            
-                            add_style_load_data_response();
-                            add_content_table(response.data.establishment);
-                            add_data_map(response.data, map);
-                            add_event_list_web();
-
-                            selectElement('#query_location input[type="submit"]').setAttribute('disabled', true);
-                            
-                        }else{
-                            stop_animation_loader('error');
-                            msg_error.innerHTML = response.message;
-                            msg_error.classList.remove('hide');
-                            msg_error.classList.add('show');
-                            btn.removeAttribute('disabled');
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error);
                         stop_animation_loader('error');
                         btn.removeAttribute('disabled');
 
-                    })
-                    
+                        msg_error.innerHTML = '¡Disculpe! Usted se encuentra fuera del área de influencia del estado Zulia - Venezuela';
+                        msg_error.classList.remove('hide');
+                        msg_error.classList.add('show');
+
+                    }else{
+
+                        let FormData_input = new FormData();
+                        FormData_input.append('lat', lat);
+                        FormData_input.append('lng', lng);
+
+                        get_post_data_json(
+                            'assets/php/create_list_establishment_location.php',
+                            FormData_input
+                        )
+                        .then(response => {
+                            if(response.response){
+                                stop_animation_loader('success');
+                
+                                add_style_load_data_response();
+                                add_content_table(response.data.establishment);
+                                add_data_map(response.data, map);
+                                add_event_list_web();
+
+                                selectElement('#query_location input[type="submit"]').setAttribute('disabled', true);
+                                
+                            }else{
+                                stop_animation_loader('error');
+                                msg_error.innerHTML = response.message;
+                                msg_error.classList.remove('hide');
+                                msg_error.classList.add('show');
+                                btn.removeAttribute('disabled');
+                            }
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            stop_animation_loader('error');
+                            btn.removeAttribute('disabled');
+
+                        })
+
+                    }
+
                 }
 
             },
@@ -868,7 +940,11 @@ function load(data_municipality){
         }
     }, false);
 
-    selectElement('#btn_geolocation').addEventListener('click', init_location, false);
+    selectElement('#btn_geolocation').addEventListener('click', (e) =>{
+        e.preventDefault();
+        let btn = e.target;
+        init_location(btn, map);
+    }, false);
 
     selectElement('#query_location').addEventListener('submit', (e) => {
         e.preventDefault();

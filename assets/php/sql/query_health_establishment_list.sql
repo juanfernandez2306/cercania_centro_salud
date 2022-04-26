@@ -1,6 +1,10 @@
 SELECT
-ST_X(geom) AS lng,
-ST_Y(geom) AS lat,
+ROUND(
+    ST_X(geom),
+5) AS lng,
+ROUND(
+    ST_Y(geom),
+5) AS lat,
 UPPER(nombre) AS name,
 ROUND(
     ST_Distance_Sphere(
@@ -14,4 +18,4 @@ ST_Contains(
     geom
 ) = 1
 ORDER BY distance ASC
-LIMIT 10;
+LIMIT 30;

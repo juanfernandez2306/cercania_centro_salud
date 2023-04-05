@@ -5,12 +5,12 @@ para crear aplicaciones de mapas web con la API de __Google Maps__.
 
 ## :eye_speech_bubble: Overview
 
-## Web
+### :computer: Web
 
 ![Img overview project](assets/img/overview.gif)
 
-## Mobile
-<img src="assets/img/overview_mobile.gif" width="350">
+### :iphone: Mobile
+<img src="assets/img/overview_mobile.gif" width="280">
 
 ## Demo
 

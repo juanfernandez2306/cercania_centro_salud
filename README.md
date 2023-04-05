@@ -10,7 +10,7 @@ para crear aplicaciones de mapas web con la API de __Google Maps__.
 ![Img overview project](assets/img/overview.gif)
 
 ## Mobile
-![Img overview project](assets/img/overview_mobile.gif | width=350px)
+<img src="assets/img/overview_mobile.gif" width="350">
 
 ## Demo
 

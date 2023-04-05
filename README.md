@@ -9,7 +9,7 @@ para crear aplicaciones de mapas web con la API de __Google Maps__.
 
 ## Demo
 
-[Demo](http://jfcoordenadas.xyz/cercania_centro_salud/)
+[Demo](https://cercaniacentrosalud.jfcoordenadas.xyz/)
 
 ## :keyboard: Framework
 - [Google Maps Platform](https://mapsplatform.google.com/intl/es/)
